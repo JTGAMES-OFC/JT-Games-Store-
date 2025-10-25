@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <link rel="icon" href="https://yt3.googleusercontent.com/tZjRjVHxbqoDXGHVwPeQ-G4wl_gM7NSPYEZtolQ6jf51881BOzfWe1pZVct7e15q4ZHZwRpjbw=s160-c-k-c0x00ffffff-no-rj" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JT Games Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- BLOQUEIO TEMPORÁRIO -->
+  <div id="maintenance-screen" class="fixed inset-0 bg-gray-900 text-white flex flex-col justify-center items-center text-center px-6 z-[9999]">
+    <h1 class="text-3xl font-bold mb-4">🚧 JT Games Store em atualização 🚧</h1>
+    <p class="text-lg mb-6">Nosso site está temporariamente indisponível devido à grande atualização agendada para <strong>01/11 às 6h UTC(-3)</strong>.</p>
+    <p class="text-sm text-gray-300">Por favor, volte mais tarde. Estamos preparando melhorias incríveis para você!</p>
+  </div>
+
+  <!-- CONTEÚDO DO SITE -->
+  <div id="site-content" class="hidden">
+    <div class="bg-yellow-400 text-yellow-900 text-center py-3 fixed w-full top-0 z-50">
+      <p class="font-semibold text-sm md:text-base">
+        AVISO: Atualização da JT GAMES STORE 01/11.
+      </p>
+    </div>
+
+    <div class="pt-12 md:pt-14"></div>
+
+    <nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg fixed w-full top-0 z-40">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-extrabold tracking-wide">
+          <a href="#">JT Games Store</a>
+        </h1>
+        <ul class="hidden md:flex space-x-6 font-medium">
+          <li><a href="#" class="hover:text-gray-200">Início</a></li>
+          <li><a href="#" class="hover:text-gray-200">Populares</a></li>
+          <li><a href="#" class="hover:text-gray-200">Novos</a></li>
+          <li><a href="#" class="hover:text-gray-200">Categorias</a></li>
+        </ul>
+        <div class="flex items-center space-x-4">
+          <input type="text" placeholder="Buscar jogos..." class="hidden md:block p-2 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-white text-gray-800" />
+          <button class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100">Login</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="pt-24"></div>
+
+    <section class="relative w-full px-4 max-w-6xl mx-auto">
+      <div class="overflow-hidden rounded-2xl shadow-xl">
+        <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
+          <div class="min-w-full relative">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1117850/capsule_616x353.jpg" alt="Cuphead" class="w-full h-80 object-cover" />
+            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
+              <h2 class="text-2xl font-bold">Cuphead: Versão Completa</h2>
+              <a href="Cuphead.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Ver Detalhes</a>
+            </div>
+          </div>
+          <div class="min-w-full relative">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg" alt="Hollow Knight" class="w-full h-80 object-cover" />
+            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
+              <h2 class="text-2xl font-bold">Hollow Knight em breve!</h2>
+            </div>
+          </div>
+          <div class="min-w-full relative">
+            <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2638370/header.jpg" alt="FNAF" class="w-full h-80 object-cover" />
+            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
+              <h2 class="text-2xl font-bold">FNAF Into the Pit em breve!</h2>
+            </div>
+          </div>
+          <div class="min-w-full relative">
+            <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000006442/691ba3e0801180a9864cc8a7694b6f98097f9d9799bc7e3dc6db92f086759252" alt="Celeste" class="w-full h-80 object-cover" />
+            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
+              <h2 class="text-2xl font-bold">Celeste em breve!</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 mt-12">
+      <h2 class="text-2xl font-bold mb-6">Jogos Populares</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <!-- Cards de jogos -->
+      </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 mt-16 py-10">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h3 class="font-bold text-lg">JT Games Store</h3>
+          <p class="text-sm mt-2">Sua loja digital de jogos favorita.</p>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg">Links</h3>
+          <ul class="mt-2 space-y-1 text-sm">
+            <li><a href="#" class="hover:text-white">Início</a></li>
+            <li><a href="#" class="hover:text-white">Categorias</a></li>
+            <li><a href="#" class="hover:text-white">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg">Redes Sociais</h3>
+          <div class="flex space-x-3 mt-2">
+            <a href="https://www.youtube.com/@JTGAMES-STUDIOS" class="hover:text-white">📘 Youtube</a>
+            <a href="https://www.instagram.com/jtgamesstudios/?igsh=OWxxeXh0dWhzazJp#" class="hover:text-white">📷 Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-xs mt-6 text-gray-500">© 2025 JT Games Store. Todos os direitos reservados.</div>
+    </footer>
+  </div>
+
+  <script>
+    // ⏰ Data de liberação (01/11 às 6h UTC)
+    const releaseDate = new Date(Date.UTC(2025, 10, 1, 6, 0, 0)); // mês é 0-indexado: 10 = novembro
+
+    const now = new Date();
+    const maintenanceScreen = document.getElementById('maintenance-screen');
+    const siteContent = document.getElementById('site-content');
+
+    if (now >= releaseDate) {
+      maintenanceScreen.style.display = 'none';
+      siteContent.classList.remove('hidden');
+    } else {
+      siteContent.classList.add('hidden');
+    }
+
+    // Se quiser, atualiza automaticamente quando chegar a hora
+    setInterval(() => {
+      const current = new Date();
+      if (current >= releaseDate) {
+        maintenanceScreen.style.display = 'none';
+        siteContent.classList.remove('hidden');
+      }
+    }, 60000); // checa a cada minuto
+  </script>
+
+</body>
+</html>
