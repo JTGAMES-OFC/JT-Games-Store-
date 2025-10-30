@@ -285,17 +285,34 @@
 </head>
 <body>
 
-<!-- BLOQUEIO TEMPORÁRIO -->
-<div id="maintenance-screen" style="position:fixed; inset:0; background:#111; color:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; z-index:9999; font-family:'Segoe UI',sans-serif;">
-  <h1 style="font-size:2rem; font-weight:bold; margin-bottom:1rem;">🚧 JT Games Store em atualização 🚧</h1>
-  <p style="font-size:1.1rem; margin-bottom:0.5rem;">
+<!-- BLOQUEIO TEMPORÁRIO (100% compatível com celular e PC) -->
+<div id="maintenance-screen"
+  style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0b0b0b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 999999;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  ">
+  <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">🚧 JT Games Store em atualização 🚧</h1>
+  <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">
     Nosso site está temporariamente indisponível devido à grande atualização agendada para <strong>02/11 às 20h UTC</strong>.
   </p>
-  <p style="font-size:0.9rem; color:#ccc; max-width:600px;">
+  <p style="font-size: 0.9rem; color: #ccc; max-width: 600px;">
     Por favor, volte mais tarde. Estamos preparando melhorias incríveis para você!
   </p>
 </div>
-
 
     <main class="game-page">
         <section class="hero-section" style="background-image: url('https://www.adrenaline.com.br/wp-content/uploads/2022/07/cuphead-the-delicious-last-course-vendas_2.jpg');">
@@ -359,24 +376,22 @@
 
     <script>
       
-        // Data e hora de liberação: 02/11/2025 às 20:00 UTC
-  const releaseDate = new Date(Date.UTC(2025, 10, 2, 20, 0, 0)); // Mês é 0-indexado (10 = novembro)
-
+  // Data e hora de liberação: 02/11/2025 às 20:00 UTC
+  const releaseDate = new Date(Date.UTC(2025, 10, 2, 20, 0, 0)); // novembro = 10 (0-indexado)
   const maintenanceScreen = document.getElementById('maintenance-screen');
-  const siteContent = document.body;
 
-  // Verifica o horário atual e libera o site após a data
   function checkRelease() {
     const now = new Date();
     if (now >= releaseDate) {
       maintenanceScreen.style.display = 'none';
     } else {
       maintenanceScreen.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // impede rolagem no celular
     }
   }
 
   checkRelease();
-  setInterval(checkRelease, 60000); // checa a cada 1 minuto
+  setInterval(checkRelease, 60000); // Verifica a cada minuto
       
         /* =================================== */
         /* CÓDIGO JAVASCRIPT          */
