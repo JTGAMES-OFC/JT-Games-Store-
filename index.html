@@ -1,144 +1,1333 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <link rel="icon" href="https://yt3.googleusercontent.com/tZjRjVHxbqoDXGHVwPeQ-G4wl_gM7NSPYEZtolQ6jf51881BOzfWe1pZVct7e15q4ZHZwRpjbw=s160-c-k-c0x00ffffff-no-rj" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JT Games Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
+  
+  /* Estilo das Abas (Estilo Steam) */
+.home_tab {
+    background-color: rgba(39, 57, 78, 0.8);
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.home_tab:hover { background-color: rgba(62, 93, 126, 0.8); }
+.home_tab.active {
+    background-color: rgba(42, 71, 94, 1);
+    border-bottom-color: #66c0f4;
+}
+.tab_item {
+    display: flex;
+    background-color: rgba(42, 71, 94, 0.5);
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+    align-items: center;
+}
+.tab_item:hover { background-color: rgba(62, 93, 126, 1); }
+.tab_item_cap_img { width: 184px; height: 69px; }
+.tab_item_content { padding-left: 1rem; flex-grow: 1; }
+.tab_item_name { font-weight: bold; }
+.tab_item_top_tags { font-size: 0.75rem; color: #a0a0a0; }
+.tab_item_discount { margin-left: auto; margin-right: 1rem; }
+
+.platform-icon {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 0.7rem;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: bold;
+}
+
+  #mobileMenu, #mobileSearch {
+    transition: all 0.3s ease;
+  }
+
+      /* Tela de Termos */
+    #termos {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #termos-content {
+      background: #000000;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 600px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      overflow-y: auto;
+      max-height: 80%;
+    }
+    #termos h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+    #termos p {
+      text-align: left;
+      margin: 10px 0;
+    }
+    #aceitar {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+      /* Tela de novidades (overlay) */
+    #novidades {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* Caixa de conteúdo da tela */
+    #novidades-content {
+     background: #1e1e1e; /* cinza quase preto */
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 500px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: aparecer 0.4s ease;
+    }
+
+    /* Animação suave */
+    @keyframes aparecer {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    #novidades h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    #novidades ul {
+      text-align: left;
+      margin: 10px 0;
+    }
+
+    /* Botão */
+    #fechar {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2
+
     body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
 
-  <!-- BLOQUEIO TEMPORÁRIO -->
-  <div id="maintenance-screen" class="fixed inset-0 bg-gray-900 text-white flex flex-col justify-center items-center text-center px-6 z-[9999]">
-    <h1 class="text-3xl font-bold mb-4">🚧 JT Games Store em atualização 🚧</h1>
-    <p class="text-lg mb-6">Nosso site está temporariamente indisponível devido à grande atualização agendada para <strong>02/11 às 20h UTC(-3)</strong>.</p>
-    <p class="text-sm text-gray-300">Por favor, volte mais tarde. Estamos preparando melhorias incríveis para você! Alteramos a data da atualização por ser uma atualização muito grande!</p>
+  <!-- Tela de novidades -->
+  <div id="novidades" style="display:none;">
+    <div id="novidades-content">
+      <h2>Bem-vindo à nova JT Games Store!</h2>
+      <p>Você está usando a versão <strong>2.0.1101.04</strong>, com grandes melhorias:</p>
+      <ul>
+        <li> A barra de pesquisa no mobile está em desenvolvimento!</li>
+        <li> Instalação direta de jogos e apps sem APK.(Apenas em 2026)</li>
+        <li> Suporte a emuladores de PS2, PS3, N64 e clássicos.</li>
+        <li> Mais segurança e velocidade nas atualizações.</li>
+        <li> Interface otimizada e mais leve.</li>
+      </ul>
+      <button id="fechar">Fechar</button>
+    </div>
   </div>
 
-  <!-- CONTEÚDO DO SITE -->
-  <div id="site-content" class="hidden">
-    <div class="bg-yellow-400 text-yellow-900 text-center py-3 fixed w-full top-0 z-50">
-      <p class="font-semibold text-sm md:text-base">
-        AVISO: Atualização da JT GAMES STORE 01/11.
-      </p>
+
+<body class="bg-gray-950 text-gray-200">
+
+    <!-- Tela de Termos -->
+  <div id="termos" style="display:none;">
+    <div id="termos-content">
+      <h2>Termos e Políticas JT Games Store</h2>
+      <p><strong>Termos de Uso:</strong> Ao utilizar a JT Games Store, você concorda com nossas regras e responsabilidades sobre o uso de aplicativos e jogos.</p>
+      <p><strong>Política de Privacidade:</strong> Seus dados são tratados de forma segura, sem compartilhamento com terceiros, e usados apenas para melhorar sua experiência.</p>
+      <p><strong>Aviso Google 2026:</strong> A partir de 2026, a instalação de APKs fora da Play Store será restrita em dispositivos Android certificados. Por isso, a JT Games Store implementou instalação direta de jogos, sem necessidade de APK.</p>
+      <button id="aceitar">Concordo</button>
+    </div>
+  </div>
+
+    <!-- Ícones no mobile -->
+    <div class="flex items-center space-x-4 md:hidden">
+      <button id="searchToggle" class="focus:outline-none text-xl">🔍</button>
+      <button id="menuToggle" class="focus:outline-none text-2xl">☰</button>
     </div>
 
-    <div class="pt-12 md:pt-14"></div>
+  <!-- Navbar -->
+  
+<nav class="bg-gray-900 text-gray-100 shadow fixed w-full top-0 z-50 border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold tracking-wide"><a href="#">JT Games Store</a></h1>
 
-    <nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg fixed w-full top-0 z-40">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-extrabold tracking-wide">
-          <a href="#">JT Games Store</a>
-        </h1>
-        <ul class="hidden md:flex space-x-6 font-medium">
-          <li><a href="#" class="hover:text-gray-200">Início</a></li>
-          <li><a href="#" class="hover:text-gray-200">Populares</a></li>
-          <li><a href="#" class="hover:text-gray-200">Novos</a></li>
-          <li><a href="#" class="hover:text-gray-200">Categorias</a></li>
-        </ul>
-        <div class="flex items-center space-x-4">
-          <input type="text" placeholder="Buscar jogos..." class="hidden md:block p-2 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-white text-gray-800" />
-          <button class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100">Login</button>
+      <ul class="hidden md:flex space-x-6 text-sm font-medium items-center">
+        <li><a href="#" class="hover:text-white">Início</a></li>
+        <li class="relative group">
+          <a href="#" class="hover:text-white">Consoles</a>
+          <div class="absolute hidden group-hover:block bg-gray-800 text-white py-2 rounded-md shadow-lg mt-2 w-48">
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">PlayStation 3</a>
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">PlayStation 2</a>
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">PlayStation 1</a>
+            <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Super Nintendo</a>
+          </div>
+        </li>
+        <li><a href="#" class="hover:text-white">Emuladores</a></li>
+        <li><a href="#" class="hover:text-white">Android</a></li>
+        <li><a href="" class="bg-yellow-500 text-black px-3 py-1 rounded hover:bg-yellow-400 font-bold">Passe</a></li>
+      </ul>
+
+      <div class="flex items-center space-x-4">
+        <input type="text" id="desktopSearchInput" placeholder="Buscar jogos..." class="hidden md:block p-2 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900" />
+        <div id="user-section">
+          <a href="Login.html" id="login-button" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-semibold">Entrar</a>
+          <div id="user-profile" class="hidden items-center space-x-3">
+              <a href="passe-de-batalha.html" id="user-name" class="text-sm font-semibold text-white hover:text-yellow-500">Usuário</a>
+              <img src="https://i.pinimg.com/736x/ad/57/b1/ad57b11e313616c7980afaa6b9cc6990.jpg" alt="Perfil" class="w-8 h-8 rounded-full">
+              <button id="logout-button" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-xs font-semibold">Sair</button>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <button id="searchToggle" class="focus:outline-none text-xl mr-2">🔍</button>
+          <button id="menuToggle" class="focus:outline-none text-2xl">☰</button>
         </div>
       </div>
-    </nav>
+    </div>
+    <div id="mobileMenu" class="hidden flex-col space-y-3 px-6 pb-4 md:hidden bg-gray-800 border-t border-gray-700">
+        <a href="#" class="hover:text-white">Início</a>
+        <a href="#" class="hover:text-white">Consoles</a>
+        <a href="#" class="hover:text-white">Emuladores</a>
+        <a href="#" class="hover:text-white">Android</a>
+        <a href="" class="hover:text-white">Passe</a>
+    </div>
+    <div id="mobileSearch" class="hidden px-6 pb-4 md:hidden bg-gray-800">
+        <input type="text" 
+               placeholder="Buscar jogos..." 
+               class="p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900" 
+               id="mobileSearchInput" 
+        />
+    </div>
+</nav>
 
-    <div class="pt-24"></div>
-
-    <section class="relative w-full px-4 max-w-6xl mx-auto">
-      <div class="overflow-hidden rounded-2xl shadow-xl">
-        <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
-          <div class="min-w-full relative">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1117850/capsule_616x353.jpg" alt="Cuphead" class="w-full h-80 object-cover" />
-            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
-              <h2 class="text-2xl font-bold">Cuphead: Versão Completa</h2>
-              <a href="Cuphead.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Ver Detalhes</a>
-            </div>
-          </div>
-          <div class="min-w-full relative">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg" alt="Hollow Knight" class="w-full h-80 object-cover" />
-            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
-              <h2 class="text-2xl font-bold">Hollow Knight em breve!</h2>
-            </div>
-          </div>
-          <div class="min-w-full relative">
-            <img src="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2638370/header.jpg" alt="FNAF" class="w-full h-80 object-cover" />
-            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
-              <h2 class="text-2xl font-bold">FNAF Into the Pit em breve!</h2>
-            </div>
-          </div>
-          <div class="min-w-full relative">
-            <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000006442/691ba3e0801180a9864cc8a7694b6f98097f9d9799bc7e3dc6db92f086759252" alt="Celeste" class="w-full h-80 object-cover" />
-            <div class="absolute bottom-6 left-6 text-white bg-black/60 backdrop-blur-md p-6 rounded-lg">
-              <h2 class="text-2xl font-bold">Celeste em breve!</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <main class="max-w-7xl mx-auto px-6 mt-12">
-      <h2 class="text-2xl font-bold mb-6">Jogos Populares</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        <!-- Cards de jogos -->
-      </div>
-    </main>
-
-    <footer class="bg-gray-900 text-gray-300 mt-16 py-10">
-      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-          <h3 class="font-bold text-lg">JT Games Store</h3>
-          <p class="text-sm mt-2">Sua loja digital de jogos favorita.</p>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg">Links</h3>
-          <ul class="mt-2 space-y-1 text-sm">
-            <li><a href="#" class="hover:text-white">Início</a></li>
-            <li><a href="#" class="hover:text-white">Categorias</a></li>
-            <li><a href="#" class="hover:text-white">Contato</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg">Redes Sociais</h3>
-          <div class="flex space-x-3 mt-2">
-            <a href="https://www.youtube.com/@JTGAMES-STUDIOS" class="hover:text-white">📘 Youtube</a>
-            <a href="https://www.instagram.com/jtgamesstudios/?igsh=OWxxeXh0dWhzazJp#" class="hover:text-white">📷 Instagram</a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center text-xs mt-6 text-gray-500">© 2025 JT Games Store. Todos os direitos reservados.</div>
-    </footer>
+  <!-- Espaço por causa da navbar fixa -->
+  <div class="pt-24"></div>
+  
+  <!-- Menu Mobile -->
+  <div id="mobileMenu" class="hidden flex-col space-y-3 px-6 pb-4 md:hidden bg-gray-800 border-t border-gray-700">
+    <a href="#" class="hover:text-white">Início</a>
+    <a href="#" class="hover:text-white">PC</a>
+    <a href="#" class="hover:text-white">SNES</a>
+    <a href="passe-de-batalha.html" class="hover:text-white">Passe</a>
   </div>
 
+  <!-- Busca Mobile -->
+  <div id="mobileSearch" class="hidden px-6 pb-4 md:hidden bg-gray-800 border-t border-gray-700">
+    <input type="text" id="mobileSearchInput" placeholder="Buscar jogos..."
+      class="p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900" />
+  </div>
+</nav>
+
+  <!-- Carrossel -->
+  <section class="relative w-full px-4 max-w-6xl mx-auto">
+    <div class="overflow-hidden rounded-lg shadow-lg">
+      <div id="carousel" class="flex transition-transform duration-600 ease-in-out">
+        
+        
+        
+                <!-- Slide  -->
+        <div class="min-w-full relative">
+          <img src="https://www.gamekings.tv/wp-content/uploads/Red-Dead-Redemption-3-1280x720.jpg" alt="Red" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">Red Dead Redemption PS3</h2>
+            <a href="Reddead.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar ps3</a>
+          </div>
+        </div>
+      
+        <!-- Slide  -->
+        <div class="min-w-full relative">
+          <img src="https://i.pinimg.com/736x/a2/ae/ae/a2aeae543f365e6be0a635c8aa7f69dc.jpg" alt="Cuphead" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">Cuphead Android</h2>
+            <a href="Cuphead.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar</a>
+          </div>
+        </div>
+
+        <!-- Slide  -->
+        <div class="min-w-full relative">
+          <img src="https://metro.co.uk/wp-content/uploads/2019/05/H2x1_NSwitchDS_ResidentEvil4_image1600w-040f.jpg?quality=90&strip=all" alt="Resident Evil 4 PS2" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">Resident Evil 4 PS2</h2>
+            <a href="ResidentEvil4ps2.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar iso</a>
+          </div>
+        </div>
+
+        <!-- Slide  -->
+        <div class="min-w-full relative">
+          <img src="https://timelinecovers.pro/facebook-cover/download/video-game-grand-theft-auto-san-andreas-facebook-cover.jpg" alt="GTA" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">GTA San Andreas PS2</h2>
+            <a href="GtaSanps2.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar iso</a>
+          </div>
+        </div>
+        
+                <!-- Slide 4 -->
+        <div class="min-w-full relative">
+          <img src="https://cdn2.steamgriddb.com/hero/51affce7a93dd33246b69fda3ed90907.jpg" alt="Dragon Ball" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">Dragon Ball Budokai Tenkaichi 3 PS2</h2>
+             <a href="GtaSanps2.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar iso</a>
+          </div>
+        </div>
+        
+                <!-- Slide 5 -->
+        <div class="min-w-full relative">
+          <img src="https://i.ytimg.com/vi/XrnBB8kYnSI/maxresdefault.jpg" alt="medal of honor" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">Medal Of Honor PS1</h2>
+             <a href="GtaSanps2.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar</a>
+          </div>
+        </div>
+        
+                        <!-- Slide 6 -->
+        <div class="min-w-full relative">
+          <img src="https://cdn2.steamgriddb.com/hero/d247d23a0c6e6ddfd8988d4fffee1947.png" class="w-full h-80 object-cover" />
+          <div class="absolute bottom-6 left-6 text-white bg-black/70 p-6 rounded-md">
+            <h2 class="text-2xl font-bold">Super Mario World SNES</h2>
+             <a href="GtaSanps2.html" class="mt-3 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-semibold">Baixar</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="flex justify-center mt-3 space-x-2">
+      <button onclick="goToSlide(0)" class="dot w-3 h-3 rounded-full bg-gray-500"></button>
+      <button onclick="goToSlide(1)" class="dot w-3 h-3 rounded-full bg-gray-700"></button>
+      <button onclick="goToSlide(2)" class="dot w-3 h-3 rounded-full bg-gray-700"></button>
+      <button onclick="goToSlide(3)" class="dot w-3 h-3 rounded-full bg-gray-700"></button>
+      <button onclick="goToSlide(4)" class="dot w-3 h-3 rounded-full bg-gray-700"></button>
+      <button onclick="goToSlide(5)" class="dot w-3 h-3 rounded-full bg-gray-700"></button>
+      <button onclick="goToSlide(6)" class="dot w-3 h-3 rounded-full bg-gray-700"></button>
+    </div>
+
+    <!-- Botões -->
+    <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
+      <button onclick="prevSlide()" class="bg-black/70 text-white p-2 rounded-full hover:bg-black/90">◀</button>
+    </div>
+    <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
+      <button onclick="nextSlide()" class="bg-black/70 text-white p-2 rounded-full hover:bg-black/90">▶</button>
+    </div>
+  </section>
+  
+  <div class="mb-8">
+    <div class="home_tabs_row flex space-x-1 rounded-t-md overflow-hidden">
+        <button class="home_tab active" onclick="openTab(event, 'new')">Novidades</button>
+        <button class="home_tab" onclick="openTab(event, 'top')">Mais Baixados</button>
+        <button class="home_tab" onclick="openTab(event, 'soon')">Em Breve</button>
+    </div>
+    <div id="new" class="tab_content bg-gray-900 p-4 rounded-b-md">
+        <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://cdn2.steamgriddb.com/hero_thumb/6fb5805e13f6fac6c4b268029196d1be.jpg" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Pro Evolution Soccer 6</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-purple-600">PSP</span>
+                    Esportes, Futebol, Clássico
+                </div>
+            </div>
+            <div class="tab_item_discount">
+                <div class="discount_block no_discount"><div class="discount_final_price">Baixar</div></div>
+            </div>
+        </a>
+        <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://cdn2.steamgriddb.com/thumb/0d8a89515fe89cd53cdedd3c039a15b0.jpg" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Castlevania: Symphony of the Night</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-gray-500">PS1</span>
+                    Metroidvania, RPG, Gótico
+                </div>
+            </div>
+            <div class="tab_item_discount">
+                <div class="discount_block no_discount"><div class="discount_final_price">Baixar</div></div>
+            </div>
+        </a>
+                <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://i0.wp.com/www.arcadeattack.co.uk/wp-content/uploads/2019/07/Super-Mario-World-SNES-Banner.jpg?ssl=1" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Super Mario World</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-red-700">SNES</span>
+                    Jogo eletrônico de plataforma
+                </div>
+            </div>
+            <div class="tab_item_discount">
+                <div class="discount_block no_discount"><div class="discount_final_price">Baixar</div></div>
+            </div>
+        </a>
+    </div>
+    <div id="top" class="tab_content hidden bg-gray-900 p-4 rounded-b-md">
+                      <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://m.exophase.com/retro/games/o/7d4db3.png?0c5e954cd9ca3f845939a00fe5a4886c" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">God of War II</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-blue-600">PS2</span>
+                    Ação, Aventura, Mitologia
+                </div>
+            </div>
+            <div class="tab_item_discount">
+                <div class="discount_block no_discount"><div class="discount_final_price">Baixar</div></div>
+            </div>
+        </a>
+            <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://s2-techtudo.glbimg.com/xAtqIk-A0UCSBnTWoxtvRjjGhz4=/0x0:695x390/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2021/w/R/7El6N3Qtq7Ji2LOz2IPA/2015-03-10-grand-theft-auto-gta-san-andreas-playstation-2-psn.jpg" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Gta: San Andreas </div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-blue-700">PS2</span>
+                     Mundo aberto, Jogo eletrônico de tiro
+                </div>
+            </div>
+            <div class="tab_item_discount">
+                <div class="discount_block no_discount"><div class="discount_final_price">Baixar</div></div>
+            </div>
+        </a>
+            <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000020840/60eebc8f7133f685eddbffbe43c8da617ba0a5d699f2008f9c31c6119d1792af" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Hollow Knight: Silksong </div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-blue-700">PS2</span>
+                      Metroidvania, Jogo eletrônico de luta
+                </div>
+            </div>
+            <div class="tab_item_discount">
+                <div class="discount_block no_discount"><div class="discount_final_price">Baixar</div></div>
+            </div>
+        </a>
+    </div>
+      </div>
+    <div id="soon" class="tab_content hidden bg-gray-900 p-4 rounded-b-md">
+              <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://images.sftcdn.net/images/t_app-cover-s-16-9,f_auto/p/1e03eb86-fa4e-4731-af5c-110c04114c0c/2004508890/jujutsu-kaisen-cursed-clash-have-fun-with-Jujutsu-Kaisen-Cursed-Clash-for-nintendo-switch.jpg" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Jujutsu Kaisen Cursed Clash</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-pink-600">Switch</span>
+                    Jogo eletrônico de luta, Jogo eletrônico de ação
+                </div>
+            </div>
+            </a>
+            <div
+                  <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000086956/d13ae5d926b6c7ad34769073b7d91012d6ed55f0082600ab334ab941c9340060" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Demon Slayer The Hinokami Chronicles 2</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-pink-600">Switch</span>
+                    Jogo eletrônico de luta
+                </div>
+            </div>
+            </a>
+    </div>
+    
+    <div
+                  <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_656/b_white/f_auto/q_auto/ncom/software/switch/70010000016048/2602862595e8a25ffff70d64fc9fe3d828a3a47d02d9f9e29b3e94f40ac39c56" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">NARUTO SHIPPUDEN™: Ultimate Ninja STORM 4 ROAD TO BORUTO</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-pink-600">Switch</span>
+                    Jogo eletrônico de luta
+                </div>
+            </div>
+            </a>
+    </div>
+    
+                      <a href="#" class="tab_item">
+            <img class="tab_item_cap_img" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1720558643" />
+            <div class="tab_item_content">
+                <div class="tab_item_name">Red Dead Redemption 2</div>
+                <div class="tab_item_top_tags">
+                    <span class="platform-icon bg-blue-900">Pc</span>
+                     Mundo aberto, Jogo eletrônico de tiro, Faroeste
+                </div>
+            </div>
+            </a>
+    </div>
+    
+</div>
+</div>
+
+<body class="bg-gray-900 text-white flex flex-col justify-center items-center text-center min-h-screen px-6">
+
+
+
+<!-- BLOQUEIO TEMPORÁRIO -->
+<div id="maintenance-screen" class="fixed inset-0 bg-gray-900 text-white flex flex-col justify-center items-center text-center px-6 z-[9999]">
+  <h1 class="text-3xl font-bold mb-4">🚧 JT Games Store em atualização 🚧</h1>
+  <p class="text-lg mb-6">
+    Nosso site está temporariamente indisponível devido à grande atualização agendada para <strong>02/11 às 20h UTC</strong>.
+  </p>
+  <p class="text-sm text-gray-300">
+    Por favor, volte mais tarde. Estamos preparando melhorias incríveis para você!
+  </p>
+</div>
+  
+  <!-- Seção de Jogos estilo Play Store -->
+  <main class="max-w-7xl mx-auto px-6 mt-12">
+    <h2 class="text-4xl font-bold mb-6">Jogos Android</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+
+      <!-- Card estilo Play Store com link na imagem -->
+<div class="flex flex-col items-center game-card">
+  <a href="Cuphead.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDYVrtJU9Sto-xkAXZNoYfbVactu-RBfOccKBfp_w6XLJ9lBKohUwZlxw&s=10"
+         alt="Cuphead"
+         class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  </a>
+  <h3 class="mt-2 text-sm font-semibold text-center">Cuphead</h3>
+  <p class="text-xs text-gray-400 text-center">Ação / Indie</p>
+</div>
+
+      <!-- Card -->
+      <div class="flex flex-col items-center game-card">
+        <img src="https://img.utdstc.com/icon/499/a3d/499a3dd14d609ecc134f2784e3e9ef468583771ea7692c26ff79acf0f6957946:200"
+             alt="Aethersx2"
+             class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+        <h3 class="mt-2 text-sm font-semibold text-center">Aethersx2</h3>
+        <p class="text-xs text-gray-400 text-center">Emulador</p>
+      </div>
+
+      <!-- Card -->
+      <div class="flex flex-col items-center game-card">
+        <img src="https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/1619987722169-VV6ZASHHZNRBJW9X0PLK/Key_Art_02_layeredjpg.jpg?format=1500w"
+             alt="Hollow Knight"
+             class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+        <h3 class="mt-2 text-sm font-semibold text-center">Hollow Knight</h3>
+        <p class="text-xs text-gray-400 text-center">Metroidvania</p>
+      </div>
+
+      <!-- Card -->
+      <div class="flex flex-col items-center game-card">
+        <img src="https://www.adrenaline.com.br/wp-content/uploads/2023/07/hollow-knight-silksong-capa.jpg"
+             alt="hollow knight SilkSong"
+             class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+        <h3 class="mt-2 text-sm font-semibold text-center">Hollow Knight SilkSong</h3>
+        <p class="text-xs text-gray-400 text-center">Metroidvania</p>
+      </div>
+
+      <!-- Card -->
+      <div class="flex flex-col items-center game-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEzkmNlaF7r5oh3XFiY7OrvZCBKrr44jbTbg&s"
+             alt="Celeste"
+             class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+        <h3 class="mt-2 text-sm font-semibold text-center">PPSSPP Gold</h3>
+        <p class="text-xs text-gray-400 text-center">Emulador</p>
+      </div>
+
+<!-- Card -->
+      <div class="flex flex-col items-center game-card">
+        <img src="https://dn721609.ca.archive.org/0/items/NSX2-RLS/logo_light.png"
+             alt="Celeste"
+             class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+        <h3 class="mt-2 text-sm font-semibold text-center">NetherSx2</h3>
+        <p class="text-xs text-gray-400 text-center">Emulador</p>
+      </div>
+    
+      
+
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYtI2jYVD0j6-FA3FNeCCRgrEXzemRrLOzTabA3lS6HZxcJv19JyTZKGs&s=10"
+       alt="Undertale"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Undertale</h3>
+  <p class="text-xs text-gray-400 text-center">RPG</p>
+</div>
+
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwo_am-X2hTwxhTFbNPq30ikouP2kqu2eRw&s"
+       alt="Minecraft"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Minecraft Java</h3>
+  <p class="text-xs text-gray-400 text-center">Aventura/Emulador</p>
+</div>
+
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://unlockallcharacters.com/wp-content/uploads/2025/06/Z-Legends-3-Icon-new-1.webp"
+       alt="Z legends"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Z Legends</h3>
+  <p class="text-xs text-gray-400 text-center">Ação</p>
+</div>
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://notadogame.com/uploads/game/cover/250x/5bfdc496d5db3.jpg"
+       alt="Bully"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Bully</h3>
+  <p class="text-xs text-gray-400 text-center">Ação/Mundo Aberto</p>
+</div>
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://play-lh.googleusercontent.com/XRlCpj22PFJuFK43QcE3u5RxmoNUed7YO_zG-6F1PCqjrBIIURbTBDvTgLVVIk5pNeY=w240-h480-rw"
+       alt="GTA"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">GTA: San Andreas</h3>
+  <p class="text-xs text-gray-400 text-center">Ação/Mundo Aberto</p>
+</div>
+
+
+<!-- Card -->
+<div class="flex flex-col items-center">
+    <a href="#" class="w-28 h-28 rounded-2xl bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition">
+        <span class="text-3xl font-bold text-gray-500">→</span>
+    </a>
+    <h3 class="mt-2 text-sm font-semibold text-center">Ver Mais</h3>
+</div>
+</div>
+
+      </div>
+      </div>
+  <!-- Seção de Jogos estilo Play Store -->
+  <main class="max-w-7xl mx-auto px-6 mt-12">
+    <h2 class="text-4xl font-bold mb-6">Jogos PS2 e PSP</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+
+      <!-- Card -->
+      <div class="flex flex-col items-center game-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv_SxP9vcg-f0YOTmqP3uNev4KF-hce2eL2q5M19EGEBReeioVd-FHxZ03&s=10"
+             alt="Celeste"
+             class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+        <h3 class="mt-2 text-sm font-semibold text-center">Resident Evil 4</h3>
+        <p class="text-xs text-gray-400 text-center">Ps2</p>
+      </div>
+<!-- Card 1 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBAdS6Y5Nboua2vbRBMPH7wovpE69L1hZfWD3YsyxRxLq3mDeaxLqImCk&s=10"
+       alt="Final Fantasy X"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Final Fantasy X</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 2 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4yWLrUMH5jMyr6SkmjIS9cYaYr3iqkeKUBhx3RntZ7qbo2hgVwGK-ZmU&s=10"
+       alt="Metal Gear Solid 3"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Metal Gear Solid 3</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 3 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaTkGCJjcVcZl4NN8O7X2WjwTx9HEpqkn9Plmkto1S6OvMAmhfQ6nw7_e_&s=10"
+       alt="Kingdom Hearts"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Kingdom Hearts</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 4 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVtpy_06YfdL3zyHSZ4X4trjqU6U2fTpyfg&s"
+       alt="God of War II"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">God of War II</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 5 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEvuQepPThvWwjWb3N_oz6WjpHi0oXM3i67A&s"
+       alt="Persona 3 Portable"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Persona 3 Portable</h3>
+  <p class="text-xs text-gray-400 text-center">PSP</p>
+</div>
+
+<!-- Card 6 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/0/05/Capa_de_Patapon.jpg"
+       alt="Patapon"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Patapon</h3>
+  <p class="text-xs text-gray-400 text-center">PSP</p>
+</div>
+
+<!-- Card 7 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUauYJ7_QIUS-HMD_P1HzGKMg8qfJFsqCXq2pkT5LPqZL5ML6Eu77b22c&s=10"
+       alt="Monster Hunter Freedom"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Monster Hunter Freedom</h3>
+  <p class="text-xs text-gray-400 text-center">PSP</p>
+</div>
+
+<!-- Card 8 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWclOZNHO27zcblXBWy4tn4yVUeQcajoPQBqUKIXZT16JzoiyPp6v-Pzc&s=10"
+       alt="GTA: San Andreas"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">GTA: San Andreas</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 9 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://pbs.twimg.com/media/GCJD1-DW0AE-3g5.jpg"
+       alt="Black"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Black</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 10 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://archive.org/download/dragon-ball-z-budokai-tenkaichi-3-usa-en-ja_202209/61UDrjhqypL._SY445_.jpg"
+       alt="Dragon Ball"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Dragon Ball Z: Budokai Tenkaichi 3
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 11 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://bdjogos.com.br/capas/12315-dragon-ball-z-budokai-tenkaichi-2-playstation-2-capa-1.jpg?v=20250823174444"
+       alt="Dragon Ball"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Dragon Ball Z: Budokai Tenkaichi 2
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 12 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://assets-prd.ignimgs.com/2022/01/06/dragon-ball-z-budokai-tenkaichi-1-button-crop-1641510426996.jpg?crop=1%3A1%2Csmart&format=jpg&auto=webp&quality=80"
+       alt="Dragon Ball"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Dragon Ball Z: Budokai Tenkaichi 1
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 13 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://bdjogos.com.br/capas/1621-grand-theft-auto-iii-playstation-2-capa-1.jpg"
+       alt="GTA"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">GTA 3</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 14 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/677af80a-4f37-4a8c-8228-1dc57a31cf6f/dimb5bi-90ccd3ee-2d24-4e3f-84f1-cd295fa07688.png/v1/fit/w_414,h_589,q_70,strp/gta_vice_city___ps2_box_art_by_jolu42_dimb5bi-414w.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcLzY3N2FmODBhLTRmMzctNGE4Yy04MjI4LTFkYzU3YTMxY2Y2ZlwvZGltYjViaS05MGNjZDNlZS0yZDI0LTRlM2YtODRmMS1jZDI5NWZhMDc2ODgucG5nIiwid2lkdGgiOiI8PTkwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.OT4gcULhpihikejA0VJmhdIvSwJ0Wcg5BX6IbXHFHlA"
+       alt="GTA"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">GTA: Vice City 
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 15 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/6/66/ShadowOfTheColossusGH.jpg"
+       alt="Shadow of the Colossus"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Shadow of the Colossus
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card 16 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://dubsgamer.com/wp-content/uploads/2023/03/The-King-of-Fighters-2002-Challenge-to-Ultimate-Battle-e1680119215467.png"
+       alt="The KingofFighters"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">The King of Fighters 2002
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS2</p>
+</div>
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://bdjogos.com.br/capas/21575-pes-6-pro-evolution-soccer-psp-capa-1.jpg"
+       alt="pes"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Pro Evolution Soccer 6
+</h3>
+  <p class="text-xs text-gray-400 text-center">PSP</p>
+</div>
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Uot0KELL1Eb-dLofHBQHiDrKo5djdE6NA7vRvOHAhyOR7pagHhZ9XodGjBxPHWBz-l4&usqp=CAU"
+       alt="DragonBall"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Dragon Ball Z: Shin Budokai
+</h3>
+  <p class="text-xs text-gray-400 text-center">PSP</p>
+</div>
+
+<!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfJvf_xIGpL9TTsllgEkm7L2Qswwkn1p7VXg&s"
+       alt="GOW"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">God of War: Ghost of Sparta
+</h3>
+  <p class="text-xs text-gray-400 text-center">PSP</p>
+</div>
+<!-- Card -->
+<div class="flex flex-col items-center">
+    <a href="#" class="w-28 h-28 rounded-2xl bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition">
+        <span class="text-3xl font-bold text-gray-500">→</span>
+    </a>
+    <h3 class="mt-2 text-sm font-semibold text-center">Ver Mais</h3>
+</div>
+</div>
+
+</div>
+</div>
+
+  <!-- Seção de Jogos ps1 -->
+  <main class="max-w-7xl mx-auto px-6 mt-12">
+    <h2 class="text-4xl font-bold mb-6">Jogos PS1</h2>
+     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    
+    <!-- Card 1 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://bdjogos.com.br/capas/595-Final-Fantasy-VII-Playstation-capa-1.jpg"
+       alt="Final Fantasy"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Final Fantasy VII 
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 2 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/4/45/Resident_Evil_2_capa.png"
+       alt="Resident Evil"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Resident Evil 2
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 3 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://bdjogos.com.br/capas/507-Resident-Evil-3-Nemesis-Playstation-capa-1.jpg"
+       alt="Resident Evil"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Resident Evil 3: Nemesis
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 4 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSEQO7W4WMXdtK6qnct8ey7ZDA8qgwGTXW1g&s"
+       alt="Resident Evil"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Resident Evil 1
+
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 5 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://i.pinimg.com/736x/bd/8f/1f/bd8f1fcee9585ea75d93f517c510cd14.jpg"
+       alt="Mortal Kombat"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Mortal Kombat Trilogy
+
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 6 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/4/47/Gran_Turismo_1997_capa.png"
+       alt="GranTurismo"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Gran Turismo
+
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 7 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0tZFoNkIsYF1zP_TszCtLK4yEurpCZG4VmA&s"
+       alt="GranTurismo"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Gran Turismo 2
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 8 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://bdjogos.com.br/capas/937-jackie-chan-stuntmaster-playstation-capa-1.jpg"
+       alt="JackieChanStuntmaster"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Jackie Chan Stuntmaster
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 8 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/4/4c/Metal_Gear_Solid_-_North-american_cover.jpg"
+       alt="MetalGear"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Metal Gear Solid
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 9 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://archive.org/serve/psx_sotn/psx_sotn_screenshot.jpg"
+       alt="Castlevania"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Castlevania: Symphony of the Night
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 10 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://images.launchbox-app.com/aa61e452-65f0-4319-ab68-c9bab9678393.jpg"
+       alt="Pepsiman"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Pepsiman
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 11 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/7/70/Medal_of_Honor_Capa.jpg"
+       alt="MedalofHonor"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Medal of Honor
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+
+    <!-- Card 12 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/d/dd/Crash_Bandicoot_1_capa.png"
+       alt="CrashBandicoot"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Crash Bandicoot
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS1</p>
+</div>
+<!-- Card -->
+<div class="flex flex-col items-center">
+    <a href="#" class="w-28 h-28 rounded-2xl bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition">
+        <span class="text-3xl font-bold text-gray-500">→</span>
+    </a>
+    <h3 class="mt-2 text-sm font-semibold text-center">Ver Mais</h3>
+</div>
+
+</div>
+</div>
+
+  <!-- Seção de Jogos snes -->
+  <main class="max-w-7xl mx-auto px-6 mt-12">
+    <h2 class="text-4xl font-bold mb-6">Jogos Super Nintendo</h2>
+     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+       
+           <!-- Card 1 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNWK5-90gwAcz4Ov2q4kEvjhuWaizTL830Tg&s"
+       alt="MARIO"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Super Mario World
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+
+           <!-- Card 2 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU5mgnxq3rqoPx62Kwy7gyQi8AqaiMTiNzVQ&s"
+       alt="MARIO"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Super Mario Bros. 2
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+
+           <!-- Card 3 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/1/1e/Super_Mario_World_2_Yoshis_Island_capa.jpg"
+       alt="MARIO"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Super Mario World 2: Yoshi's Island 
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+
+           <!-- Card 4 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHCmCiZQ-_uFg1CeBRVp7UOiPa_bFshkhstQ&s"
+       alt="MARIO"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Super Mario All-Stars 
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+
+           <!-- Card 5 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/f/f4/Super_Castlevania_IV_Capa.jpg"
+       alt="castlevania"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Super Castlevania IV 
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+
+           <!-- Card 6 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://images.emulatorgames.net/super-nintendo/mega-man-x.jpg"
+       alt="MegaMan"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Mega Man X
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+
+           <!-- Card 7 -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Super.Bomberman.Box.Art.SNES.PAL.png"
+       alt="Bomberman"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Super Bomberman
+</h3>
+  <p class="text-xs text-gray-400 text-center">SNES</p>
+</div>
+<!-- Card -->
+<div class="flex flex-col items-center">
+    <a href="#" class="w-28 h-28 rounded-2xl bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition">
+        <span class="text-3xl font-bold text-gray-500">→</span>
+    </a>
+    <h3 class="mt-2 text-sm font-semibold text-center">Ver Mais</h3>
+</div>
+</div>
+
+  <!-- Seção de Jogos ps3 -->
+  <main class="max-w-7xl mx-auto px-6 mt-12">
+    <h2 class="text-4xl font-bold mb-6">Jogos PS3</h2>
+     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+       
+                  <!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://m.media-amazon.com/images/I/81rGM6kO83L.jpg"
+       alt="GTA"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">GTA V
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS3</p>
+</div>
+
+                  <!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://www.vgdb.com.br/gf/fotos/games/media_55458/god-of-war-iii-55458.jpg"
+       alt="GOW"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">God of War III
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS3</p>
+</div>
+
+                  <!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/f/f3/Red_Dead_Redemption_capa.png/330px-Red_Dead_Redemption_capa.png"
+       alt="RedDeadRedemption"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">Red Dead Redemption
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS3</p>
+</div>
+
+                  <!-- Card -->
+<div class="flex flex-col items-center game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/pt/9/91/Grand_Theft_Auto_IV_capa.png"
+       alt="GTA"
+       class="w-28 h-28 rounded-2xl object-cover shadow-md hover:scale-105 transition"/>
+  <h3 class="mt-2 text-sm font-semibold text-center">GTA IV
+</h3>
+  <p class="text-xs text-gray-400 text-center">PS3</p>
+</div>
+<!-- Card -->
+<div class="flex flex-col items-center">
+    <a href="#" class="w-28 h-28 rounded-2xl bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition">
+        <span class="text-3xl font-bold text-gray-500">→</span>
+    </a>
+    <h3 class="mt-2 text-sm font-semibold text-center">Ver Mais</h3>
+</div>
+</div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé --> <!-- 2.0 versao / 1101 mes e data / 01 revisão -->
+  <footer class="bg-gray-900 text-gray-400 mt-16 py-10 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+      <div>
+        <h3 class="font-semibold text-white">JT Games Store</h3>
+        <h3 class="font-semibold text-white">Versão 2.0.1101.04</h3>
+        <p class="mt-2">Sua loja digital de jogos.</p>
+      </div>
+      <div>
+        <ul class="mt-2 space-y-1">
+        </ul>
+      </div>
+      </div>
+    </div>
+    <div class="text-center text-xs mt-6 text-gray-600">&copy; 2025 JT Games Store. Todos os direitos reservados.</div>
+  </footer>
+
   <script>
-    // ⏰ Data de liberação (01/11 às 6h UTC)
-    const releaseDate = new Date(Date.UTC(2025, 10, 2, 20, 0, 0)); // mês é 0-indexado: 10 = novembro
+  // Data e hora de liberação: 02/11/2025 às 20:00 UTC
+  const releaseDate = new Date(Date.UTC(2025, 10, 2, 20, 0, 0)); // Mês é 0-indexado (10 = novembro)
 
+  const maintenanceScreen = document.getElementById('maintenance-screen');
+  const siteContent = document.body;
+
+  // Verifica o horário atual e libera o site após a data
+  function checkRelease() {
     const now = new Date();
-    const maintenanceScreen = document.getElementById('maintenance-screen');
-    const siteContent = document.getElementById('site-content');
-
     if (now >= releaseDate) {
       maintenanceScreen.style.display = 'none';
-      siteContent.classList.remove('hidden');
     } else {
-      siteContent.classList.add('hidden');
+      maintenanceScreen.style.display = 'flex';
+    }
+  }
+
+  checkRelease();
+  setInterval(checkRelease, 60000); // checa a cada 1 minuto
+
+// Pega os dois campos de busca pelo ID
+const searchInputMobile = document.getElementById('mobileSearchInput');
+const searchInputDesktop = document.getElementById('desktopSearchInput'); // ID que você precisa adicionar
+
+// Pega TODOS os cards de jogos e todas as seções de jogos (AJUSTADO PARA SECTION)
+const gameCards = document.querySelectorAll('.game-card');
+const gameSections = document.querySelectorAll('section'); // Busca por <section> em vez de <main>
+
+function performSearch(event) {
+    const searchTerm = event.target.value.toLowerCase();
+    
+    // Seu script original rolava para a primeira seção visível (desativado temporariamente se a página tiver uma única <main>)
+    // Se você usa várias tags <main>, mantenha a linha abaixo:
+    // const visibleSection = document.querySelector('main[style*="display: block"]'); 
+
+    // Itera por todos os cards de jogo, mostrando ou escondendo
+    gameCards.forEach(function(card) {
+        // Verifica se o card é um item de jogo antes de tentar ler o h3
+        const gameTitleElement = card.querySelector('h3');
+        if (!gameTitleElement) return; // Se não tiver h3 (como o botão 'Ver Mais'), *****
+
+        const gameTitle = gameTitleElement.textContent.trim().toLowerCase();
+        
+        if (gameTitle.includes(searchTerm)) {
+            card.style.display = 'flex'; // Use 'flex' para manter o layout de grade
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    // Agora, itera pelas seções de jogos para esconder as que não têm cards visíveis
+    gameSections.forEach(function(section) {
+        // Encontra todos os cards DENTRO da seção atual
+        const cardsInSection = section.querySelectorAll('.game-card');
+        let hasVisibleCards = false;
+
+        // Verifica se pelo menos um card na seção está visível
+        cardsInSection.forEach(function(card) {
+            // Verifica se o card não está escondido
+            if (card.style.display !== 'none') {
+                hasVisibleCards = true;
+            }
+        });
+
+        // Se nenhum card estiver visível, esconde a seção inteira (apenas se houver termo de busca)
+        if (hasVisibleCards || searchTerm === '') {
+            // Aqui usamos 'block' para não interferir no layout grid/flex da sua página.
+            section.style.display = 'block'; 
+        } else {
+            section.style.display = 'none';
+        }
+    });
+}
+
+// Adiciona o "ouvinte" de eventos que dispara toda vez que o usuário digita algo em AMBOS os campos
+if (searchInputMobile) {
+    searchInputMobile.addEventListener('keyup', performSearch);
+}
+if (searchInputDesktop) {
+    searchInputDesktop.addEventListener('keyup', performSearch);
+}
+  
+  // CODIGOS A PARTIR DAQui
+  
+    // NOVO CÓDIGO PARA GERENCIAR O LOGIN
+  document.addEventListener('DOMContentLoaded', () => {
+    const userSection = document.getElementById('user-section');
+    const loginButton = document.getElementById('login-button');
+    const userProfile = document.getElementById('user-profile');
+    const userName = document.getElementById('user-name');
+    const logoutButton = document.getElementById('logout-button');
+
+    const user = JSON.parse(localStorage.getItem('jtgames_user'));
+
+    if (user) {
+      // Usuário está logado
+      loginButton.classList.add('hidden');
+      userProfile.classList.remove('hidden');
+      userProfile.classList.add('flex');
+      userName.textContent = user.name;
+    } else {
+      // Usuário não está logado
+      loginButton.classList.remove('hidden');
+      userProfile.classList.add('hidden');
     }
 
-    // Se quiser, atualiza automaticamente quando chegar a hora
-    setInterval(() => {
-      const current = new Date();
-      if (current >= releaseDate) {
-        maintenanceScreen.style.display = 'none';
-        siteContent.classList.remove('hidden');
+    logoutButton.addEventListener('click', () => {
+      localStorage.removeItem('jtgames_user');
+      window.location.reload(); // Recarrega a página para atualizar o estado
+    });
+  });
+  
+      // Scripts dos Menus Mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const searchToggle = document.getElementById('searchToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileSearch = document.getElementById('mobileSearch');
+    
+    menuToggle.addEventListener('click', () => { 
+        mobileMenu.classList.toggle('hidden'); 
+        mobileSearch.classList.add('hidden'); 
+    });
+    
+    searchToggle.addEventListener('click', () => { 
+        mobileSearch.classList.toggle('hidden'); 
+        mobileMenu.classList.add('hidden'); 
+    });
+  
+  
+        // Verifica se o usuário já aceitou os termos
+    const termosAceitos = localStorage.getItem("jtgames_termos");
+
+    if (!termosAceitos) {
+      document.getElementById("termos").style.display = "flex";
+
+      document.getElementById("aceitar").onclick = function() {
+        // Salva no localStorage que o usuário aceitou
+        localStorage.setItem("jtgames_termos", "sim");
+        // Fecha a tela de termos
+        document.getElementById("termos").style.display = "none";
       }
-    }, 60000); // checa a cada minuto
+    }
+  
+          // Defina a versão atual do app
+    const versaoAtual = "2.0.1101.04";
+
+    // Pega do localStorage a última versão que o usuário já viu
+    const versaoVista = localStorage.getItem("jtgames_versao");
+
+    // Se nunca viu ou se a versão mudou → mostra tela de novidades
+    if (versaoVista !== versaoAtual) {
+      document.getElementById("novidades").style.display = "flex";
+
+      // Quando fechar, salva no localStorage
+      document.getElementById("fechar").onclick = function() {
+        localStorage.setItem("jtgames_versao", versaoAtual);
+        document.getElementById("novidades").style.display = "none";
+      }
+    }
+  
+    const carousel = document.getElementById("carousel");
+    const dots = document.querySelectorAll(".dot");
+    let currentSlide = 0;
+    const totalSlides = carousel.children.length;
+
+    function updateSlide() {
+      carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("bg-gray-500", index === currentSlide);
+        dot.classList.toggle("bg-gray-700", index !== currentSlide);
+      });
+    }
+    function goToSlide(i){ currentSlide=i; updateSlide(); }
+    function nextSlide(){ currentSlide=(currentSlide+1)%totalSlides; updateSlide();}
+    function prevSlide(){ currentSlide=(currentSlide-1+totalSlides)%totalSlides; updateSlide();}
+    setInterval(nextSlide,5000);
+    updateSlide();
+    
+    // Script das Abas
+function openTab(event, tabName) {
+  let i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tab_content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].classList.add("hidden");
+  }
+  tablinks = document.getElementsByClassName("home_tab");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+  document.getElementById(tabName).classList.remove("hidden");
+  event.currentTarget.classList.add("active");
+}
   </script>
 
 </body>
-</html>
+</html> 
