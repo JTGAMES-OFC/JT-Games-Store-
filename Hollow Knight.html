@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  
+      <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="store-logo">JT GAMES STORE</a>
+        </div>
+    </header>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hollow Knight | JT GAMES STORE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    
+        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--dark-grey);
+        color: var(--text-color);
+        line-height: 1.6;
+        /* IMPORTANTE: Adiciona um espaço no topo para não ficar atrás do header fixo */
+        padding-top: 60px; 
+    }
+    
+        .main-header {
+        background-color: var(--dark-grey);
+        padding: 15px 0;
+        position: fixed; /* Deixa o header fixo no topo */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; /* Garante que ele fique na frente de tudo */
+        border-bottom: 1px solid var(--light-grey);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .store-logo {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+    }
+
+    .store-logo:hover {
+        color: var(--xbox-green);
+    }
+
+        /* =================================== */
+        /* ESTILOS CSS              */
+        /* =================================== */
+
+        /* Configurações Globais e Variáveis de Cor */
+        :root {
+            --xbox-green: #107c10;
+            --dark-grey: #1e1e1e;
+            --medium-grey: #2d2d2d;
+            --light-grey: #505050;
+            --text-color: #ffffff;
+            --text-muted: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-grey);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Estilos da Seção Hero */
+        .hero-section {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+            position: relative;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .game-logo {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .developer {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--xbox-green);
+            color: var(--text-color);
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .cta-button:hover {
+            background-color: #149a14;
+            transform: scale(1.05);
+        }
+
+        .scroll-down {
+            display: block;
+            margin-top: 50px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Seção de Detalhes e Mídia */
+        .details-section {
+            padding: 60px 0;
+            background-color: var(--medium-grey);
+        }
+
+        .details-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--xbox-green);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .center-heading {
+            text-align: center;
+        }
+
+        .media-gallery {
+            margin-bottom: 50px;
+        }
+
+        .main-screenshot {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap; /* Permite que as miniaturas quebrem a linha em telas menores */
+            justify-content: center; /* Centraliza as miniaturas */
+        }
+
+        .thumbnail {
+            width: 150px;
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--xbox-green);
+        }
+
+        /* Grid de Informações */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .game-description h3, .system-requirements h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        .system-requirements table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .system-requirements th, .system-requirements td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-grey);
+        }
+
+        .system-requirements th {
+            background-color: var(--dark-grey);
+        }
+
+        .system-requirements td strong {
+            color: var(--text-muted);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--dark-grey);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 900px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .game-logo {
+                max-width: 200px;
+            }
+            .cta-button {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="game-page">
+        <section class="hero-section" style="background-image: url('https://c4.wallpaperflare.com/wallpaper/671/956/992/hollow-knight-dark-landscape-hd-wallpaper-preview.jpg');">
+            <div class="hero-content">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ad944474-48c3-4adb-9059-75d10eab21b9/dd7valr-87adeaed-f35a-4d8e-b68f-6a31e7d43c3f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9hZDk0NDQ3NC00OGMzLTRhZGItOTA1OS03NWQxMGVhYjIxYjkvZGQ3dmFsci04N2FkZWFlZC1mMzVhLTRkOGUtYjY4Zi02YTMxZTdkNDNjM2YucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.hkOA-SzVzN9tZ45u8-95MM7oqOjR7p1JnQfA7Q72cJ8" alt="Logo do Jogo" class="game-logo">
+                <h1>Hollow Knight</h1>
+                <p class="developer">Desenvolvido por: Team Cherry</p>
+                <a href="https://dl.apkvision.org/hollow-knight-mobile/hollow-knight-mobile-1.5.78.11833-mod-apkvision.apk" class="cta-button" download="Cupheadjt">Baixar</a>
+                <a href="#details" class="scroll-down">Saiba Mais ↓</a>
+            </div>
+        </section>
+
+        <section id="details" class="details-section">
+            <div class="container">
+                <div class="center-heading">
+                    <h2>Visão Geral</h2>
+                </div>
+                
+                <div class="media-gallery">
+                    <img id="main-image" src="https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000003208/4643fb058642335c523910f3a7910575f56372f612f7c0c9a497aaae978d3e51" alt="Screenshot principal do jogo" class="main-screenshot">
+                    
+                    <div class="thumbnail-container">
+                        <img src="https://i.redd.it/hollow-knight-v0-o8wknpfnd35c1.jpg?width=2400&format=pjpg&auto=webp&s=d7d1e69fc85ea99b63d0a241055d8b616b25fc53" alt="Thumbnail 1" class="thumbnail active" onclick="changeImage('https://i.redd.it/hollow-knight-v0-o8wknpfnd35c1.jpg?width=2400&format=pjpg&auto=webp&s=d7d1e69fc85ea99b63d0a241055d8b616b25fc53', this)">
+                        <img src="https://external-preview.redd.it/i-freaking-beat-hollow-knight-on-fan-mad-android-port-v0-ZWpzaHV1cmtrc2FlMT2gZl9uihNyaJD4pgbCs1cJCa3xaG4iPHVZABeEjjMJ.png?format=pjpg&auto=webp&s=cdce337dbb787be9f72883fb5ee5e7e130d868d6" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('https://external-preview.redd.it/i-freaking-beat-hollow-knight-on-fan-mad-android-port-v0-ZWpzaHV1cmtrc2FlMT2gZl9uihNyaJD4pgbCs1cJCa3xaG4iPHVZABeEjjMJ.png?format=pjpg&auto=webp&s=cdce337dbb787be9f72883fb5ee5e7e130d868d6', this)">
+                        <img src="https://img2.tapimg.net/post/images/FuX6br9z455_ABTgWOnL-QFx-_H4.jpeg?imageMogr2/thumbnail/1080x9999%3E/quality/80/format/jpg/interlace/1/meta-keep-list/VXNlckNvbW1lbnQ%3D/ignore-error/1&t=1" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('https://img2.tapimg.net/post/images/FuX6br9z455_ABTgWOnL-QFx-_H4.jpeg?imageMogr2/thumbnail/1080x9999%3E/quality/80/format/jpg/interlace/1/meta-keep-list/VXNlckNvbW1lbnQ%3D/ignore-error/1&t=1', this)">
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="game-description">
+                        <h3>Descrição</h3>
+                        <p>Hollow Knight é um jogo indie de gênero metroidvania desenvolvido e publicado pela Team Cherry, lançado para Microsoft Windows, macOS e Linux em 2017 e, posteriormente, para Nintendo Switch, Playstation 4 e Xbox One em 2018.</p>
+                        <p>Hollow Knight é um jogo bidimensional clássico que possui gráficos desenhados à mão e inúmeros níveis para experimentar.</p>
+                    </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JT GAMES STORE. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        /* =================================== */
+        /* CÓDIGO JAVASCRIPT          */
+        /* =================================== */
+
+        function changeImage(imageSrc, clickedThumbnail) {
+            // Pega o elemento da imagem principal
+            const mainImage = document.getElementById('main-image');
+            
+            // Adiciona um efeito de fade out
+            mainImage.style.opacity = 0;
+
+            // Espera a transição terminar para trocar a imagem e dar fade in
+            setTimeout(() => {
+                mainImage.src = imageSrc;
+                mainImage.style.opacity = 1;
+            }, 300); // O tempo deve ser igual ao da transição no CSS
+
+            // Lógica para destacar a miniatura ativa
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                // Remove a classe 'active' de todas as miniaturas
+                thumb.classList.remove('active');
+            });
+
+            // Adiciona a classe 'active' apenas na miniatura que foi clicada
+            clickedThumbnail.classList.add('active');
+        }
+    </script>
+</body>
+</html>

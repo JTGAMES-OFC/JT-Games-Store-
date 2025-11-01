@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  
+      <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="store-logo">JT GAMES STORE</a>
+        </div>
+    </header>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Gta San JT GAMES STORE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    
+        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--dark-grey);
+        color: var(--text-color);
+        line-height: 1.6;
+        /* IMPORTANTE: Adiciona um espaço no topo para não ficar atrás do header fixo */
+        padding-top: 60px; 
+    }
+    
+        .main-header {
+        background-color: var(--dark-grey);
+        padding: 15px 0;
+        position: fixed; /* Deixa o header fixo no topo */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000; /* Garante que ele fique na frente de tudo */
+        border-bottom: 1px solid var(--light-grey);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .store-logo {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+    }
+
+    .store-logo:hover {
+        color: var(--xbox-green);
+    }
+
+        /* =================================== */
+        /* ESTILOS CSS              */
+        /* =================================== */
+
+        /* Configurações Globais e Variáveis de Cor */
+        :root {
+            --xbox-green: #107c10;
+            --dark-grey: #1e1e1e;
+            --medium-grey: #2d2d2d;
+            --light-grey: #505050;
+            --text-color: #ffffff;
+            --text-muted: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-grey);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Estilos da Seção Hero */
+        .hero-section {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+            position: relative;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .game-logo {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .developer {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--xbox-green);
+            color: var(--text-color);
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .cta-button:hover {
+            background-color: #149a14;
+            transform: scale(1.05);
+        }
+
+        .scroll-down {
+            display: block;
+            margin-top: 50px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Seção de Detalhes e Mídia */
+        .details-section {
+            padding: 60px 0;
+            background-color: var(--medium-grey);
+        }
+
+        .details-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--xbox-green);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .center-heading {
+            text-align: center;
+        }
+
+        .media-gallery {
+            margin-bottom: 50px;
+        }
+
+        .main-screenshot {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap; /* Permite que as miniaturas quebrem a linha em telas menores */
+            justify-content: center; /* Centraliza as miniaturas */
+        }
+
+        .thumbnail {
+            width: 150px;
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--xbox-green);
+        }
+
+        /* Grid de Informações */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .game-description h3, .system-requirements h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        .system-requirements table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .system-requirements th, .system-requirements td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-grey);
+        }
+
+        .system-requirements th {
+            background-color: var(--dark-grey);
+        }
+
+        .system-requirements td strong {
+            color: var(--text-muted);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--dark-grey);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 900px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .game-logo {
+                max-width: 200px;
+            }
+            .cta-button {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="game-page">
+        <section class="hero-section" style="background-image: url('https://wallpapercat.com/w/full/3/3/e/28-3840x2160-desktop-4k-grand-theft-auto-san-andreas-wallpaper.jpg');">
+            <div class="hero-content">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7G8RY6yC5Isb5scZ1cjBqkMFkR7oY4Dh8Qcb78sjQX26uFx7VrjkV_xNySXqjqq6gG0I&usqp=CAU" alt="Logo do Jogo" class="game-logo">
+                <h1>GTA San Andreas</h1>
+                <p class="developer">Publicado por: Rockstar Games</p>
+                <a href="https://gta.gameplayer.club/index.php/downloads?task=download.send&id=90&catid=17&m=0" class="cta-button" download="GTASANPS2">Baixar</a>
+                <a href="#details" class="scroll-down">Saiba Mais ↓</a>
+            </div>
+        </section>
+
+        <section id="details" class="details-section">
+            <div class="container">
+                <div class="center-heading">
+                    <h2>Visão Geral</h2>
+                </div>
+                
+                <div class="media-gallery">
+                    <img id="main-image" src="https://s2-techtudo.glbimg.com/AEab_bAKQPdB6eecirHRmOAUWlI=/0x0:695x391/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2021/c/z/NFKPjbQH6Wicg5wrYcHw/2014-11-05-captura-de-tela-2014-11-05-as-093405.png" alt="Screenshot principal do jogo" class="main-screenshot">
+                    
+                    <div class="thumbnail-container">
+                        <img src="https://www.nme.com/wp-content/uploads/2021/08/GTA-San-Andreas-696x442.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="changeImage('https://www.nme.com/wp-content/uploads/2021/08/GTA-San-Andreas-696x442.jpg', this)">
+                        <img src="https://m.media-amazon.com/images/I/71nQx2R82dL.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('https://m.media-amazon.com/images/I/71nQx2R82dL.jpg', this)">
+                        <img src="https://i.imgur.com/ztrJovSh.jpeg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('https://i.imgur.com/ztrJovSh.jpeg', this)">
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="game-description">
+                        <h3>Descrição</h3>
+                        <p>Grand Theft Auto: San Andreas é um jogo eletrônico de ação-aventura desenvolvido pela Rockstar North e publicado pela Rockstar Games.</p>
+                        <p>Carl Johnson fugiu das pressões da vida em Los Santos, San Andreas... uma cidade que se destruía com gangues, drogas e corrupção.</p>
+                    </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 JT GAMES STORE. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        /* =================================== */
+        /* CÓDIGO JAVASCRIPT          */
+        /* =================================== */
+
+        function changeImage(imageSrc, clickedThumbnail) {
+            // Pega o elemento da imagem principal
+            const mainImage = document.getElementById('main-image');
+            
+            // Adiciona um efeito de fade out
+            mainImage.style.opacity = 0;
+
+            // Espera a transição terminar para trocar a imagem e dar fade in
+            setTimeout(() => {
+                mainImage.src = imageSrc;
+                mainImage.style.opacity = 1;
+            }, 300); // O tempo deve ser igual ao da transição no CSS
+
+            // Lógica para destacar a miniatura ativa
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                // Remove a classe 'active' de todas as miniaturas
+                thumb.classList.remove('active');
+            });
+
+            // Adiciona a classe 'active' apenas na miniatura que foi clicada
+            clickedThumbnail.classList.add('active');
+        }
+    </script>
+</body>
+</html>
