@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver 3 (Driv3r) PS2 | JT GAMES STORE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* =================================== */
+        /* VARIÁVEIS DE TEMA DRIVER 3 (AÇÃO)   */
+        /* =================================== */
+        :root {
+            --background-color: #0d0d1a; /* Azul escuro, asfalto noturno */
+            --dark-grey: #1a1a2e;
+            --text-color: #f0f0f0;
+            --secondary-text: #a0a0b5;
+            --accent-color: #ffc107; /* Amarelo (faróis/néon) */
+            --light-accent: #ffffff;
+        }
+
+        /* =================================== */
+        /* ESTILOS GERAIS                       */
+        /* =================================== */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: 60px;
+            margin: 0;
+        }
+
+        .main-header {
+            background-color: var(--dark-grey);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .store-logo {
+            font-size: 1.5em;
+            font-weight: 900;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        /* =================================== */
+        /* SEÇÃO PRINCIPAL DO JOGO              */
+        /* =================================== */
+        .game-detail-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .image-gallery {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .main-image-container {
+            width: 100%;
+            padding-top: 66%; /* Proporção de capa PS2 */
+            position: relative;
+            background-color: var(--dark-grey);
+            border: 2px solid var(--secondary-text);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+        }
+
+        #main-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .thumbnails-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px; 
+        }
+
+        .thumbnail {
+            width: 90px;
+            height: 60px;
+            cursor: pointer;
+            object-fit: cover;
+            border: 3px solid transparent;
+            border-radius: 4px;
+            transition: border 0.3s, transform 0.3s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+        /* =================================== */
+        /* SEÇÃO DE INFORMAÇÕES                 */
+        /* =================================== */
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--dark-grey);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-title {
+            color: var(--light-accent);
+            margin-top: 0;
+            font-size: 2.5em;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .platform-label {
+            display: inline-block;
+            background-color: #003791; /* Cor oficial do PS2/PS */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.8em;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin: 15px 0 25px;
+            text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.4em;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-transform: uppercase;
+        }
+
+        .buy-button:hover {
+            background-color: #ffeb3b;
+            transform: translateY(-3px);
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            border-top: 1px dashed var(--secondary-text);
+            padding-top: 15px;
+        }
+
+        .details-list li {
+            margin-bottom: 10px;
+            color: var(--secondary-text);
+        }
+
+        .details-list strong {
+            color: var(--light-accent);
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        /* =================================== */
+        /* SEÇÃO DE JOGOS RELACIONADOS          */
+        /* =================================== */
+        .related-games-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .related-title {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .game-cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--dark-grey);
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            width: 180px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(255, 193, 7, 0.3);
+        }
+
+        .game-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .game-card img {
+            width: 120px;
+            height: 160px; /* Mais alto para capa PS2 */
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s;
+        }
+
+        .game-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .game-card h3 {
+            margin-top: 10px;
+            font-size: 1em;
+            color: var(--light-accent);
+        }
+
+        .game-card p {
+            font-size: 0.8em;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="store-logo">JT GAMES STORE</a>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="game-detail-section">
+            
+            <div class="image-gallery">
+                <div class="main-image-container">
+                    <img id="main-image" src="https://lh6.googleusercontent.com/proxy/xdxuyD8scfJQKXzl4zJloBN6gVPOt0vELE9dmqkz4DuEDK95Om6tIuuengvUt3ZUpNon5Wb_hQBKlYgFOeIMZPN_gwIw_iGL8Ri1fEiS2I6W-WvXXqdSndxX3MPaG1KXJntna-tEyYOAvw" alt="Driver 3 PS2 Cover Art" />
+                </div>
+
+                <div class="thumbnails-container">
+                    <img class="thumbnail active" src="https://i.ytimg.com/vi/Wf_pHZYU2jQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA9ozsNF08vSCvUOlPK8dxYx5cd5Q" 
+                         onclick="changeImage(this.src, this)" alt="Capa Principal" />
+                    
+                    <img class="thumbnail" src="https://www.gamespot.com/a/uploads/original/gamespot/images/2004/reviews/577450-561852_20040602_001.jpg" 
+                         onclick="changeImage('https://www.gamespot.com/a/uploads/original/gamespot/images/2004/reviews/577450-561852_20040602_001.jpg', this)" alt="Ação em Miami" />
+
+                    <img class="thumbnail" src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/driver-3/9/90/DSC00559.JPG" 
+                         onclick="changeImage('https://oyster.ignimgs.com/mediawiki/apis.ign.com/driver-3/9/90/DSC00559.jpg', this)" alt="mundo" />
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h1 class="game-title">DRIV3R</h1>
+                <p class="platform-label">PlayStation 2</p>
+                <p class="description">
+                    Assuma o papel do detetive Tanner em uma missão global de infiltração para desmantelar um anel de roubo de carros. O jogo expandiu a série com a habilidade de sair do carro e se engajar em combate a pé, atravessando cidades detalhadas como **Miami, Nice e Istambul**. Uma experiência cinematográfica de ação de condução!
+                </p>
+                
+
+<a href="https://sto.romsfast.com/PS2-Redump/Driv3r%20(Europe)%20(EnEs).zip?token=cHNZalZoRllGD3VxFXVWZltZQxJ2fF4%3D" class=".buy-button" download="Cupheadjt">Baixar</a>
+
+                <ul class="details-list">
+                    <li><strong>Plataforma:</strong> PlayStation 2 </li>
+                    <li><strong>Gênero:</strong> Ação, Condução e Tiro em Terceira Pessoa</li>
+                    <li><strong>Desenvolvedor:</strong> Reflections Interactive</li>
+                    <li><strong>Lançamento:</strong> Junho de 2004</li>
+                    <li><strong>Classificação:</strong> M (Mature - Adulto)</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
