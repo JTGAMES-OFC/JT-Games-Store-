@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="store-logo">JT GAMES Store</a>
+        </div>
+    </header>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dead Redemption 2 | PC</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    
+        /* =================================== */
+        /* ESTILOS CSS - RED DEAD REDEMPTION 2 */
+        /* =================================== */
+
+        /* Configurações Globais e Variáveis de Cor */
+        :root {
+            --rdr-red: #B80F0A;      /* Vermelho Sangue (Destaque, Selo) */
+            --dark-leather: #2C201C; /* Marrom de Couro Escuro (Fundo principal) */
+            --mid-brown: #57403A;    /* Marrom Médio (Fundo da seção) */
+            --bronze-gold: #CD7F32;  /* Bronze (Bordas, Textos de Destaque) */
+            --smoke-white: #f5f5f5;  /* Branco Sujo / Poeira */
+            --text-muted: #D3C4A3;   /* Texto sutil */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-leather);
+            color: var(--smoke-white);
+            line-height: 1.6;
+            padding-top: 60px; 
+            /* Adiciona uma textura de couro escuro */
+            background-image: url('https://4kwallpapers.com/images/wallpapers/red-dead-redemption-3840x2160-10885.jpg'); 
+            background-blend-mode: multiply;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: rgba(44, 32, 28, 0.98); 
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 3px solid var(--rdr-red);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .store-logo {
+            color: var(--bronze-gold);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .store-logo:hover {
+            color: var(--smoke-white);
+        }
+
+        /* Seção Hero (Banner de Arthur Morgan) */
+        .hero-section {
+            height: 100vh;
+            /* Use uma imagem épica de Arthur Morgan */
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_-L90SxnSYti_W8Oys9ICsoUObePfvooiKQ&s'); 
+            background-size: cover;
+            background-position: top center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; 
+            align-items: flex-start;
+            padding: 5% 5% 8%; 
+            position: relative;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1.0);
+        }
+        
+        /* Efeito Cinematográfico de Neblina / Fumaça */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradiente escuro focado na parte inferior para drama */
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.9) 100%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 700px;
+            /* Animação dramática de entrada */
+            animation: slideInUp 1.5s ease-out; 
+            border-left: 5px solid var(--bronze-gold);
+            padding-left: 20px;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-logo {
+            max-width: 500px; 
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.9)); 
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 5px;
+            color: var(--bronze-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .developer {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        /* Botão de Ação (CTA) - Estilo de Placa / Selo */
+        .cta-button {
+            background-color: var(--rdr-red);
+            color: var(--smoke-white);
+            border: 3px solid var(--bronze-gold); 
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 6px var(--dark-leather); 
+            position: relative;
+            top: 0;
+            letter-spacing: 1.5px;
+        }
+
+        .cta-button:hover {
+            background-color: #D61610;
+            transform: scale(1.03);
+            box-shadow: 0 3px var(--dark-leather);
+            top: 3px;
+        }
+        
+        .cta-button:active {
+            box-shadow: 0 0 var(--dark-leather);
+            top: 6px;
+        }
+
+        .scroll-down {
+            display: block;
+            margin-top: 30px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--text-muted);
+            padding-bottom: 2px;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .scroll-down:hover {
+            color: var(--smoke-white);
+        }
+
+        /* Seção de Detalhes e Mídia */
+        .details-section {
+            padding: 80px 0;
+            background-color: var(--mid-brown);
+            /* Borda superior de bronze para separação */
+            border-top: 5px double var(--bronze-gold); 
+            border-bottom: 5px double var(--bronze-gold);
+        }
+
+        .details-section h2 {
+            font-family: 'Times New Roman', serif; 
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--rdr-red);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            display: block;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .center-heading {
+            text-align: center;
+        }
+        
+        .details-section p {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        /* Destaque para Nomes/Citações */
+        .game-description p strong {
+            color: var(--bronze-gold);
+            font-weight: 700;
+        }
+
+        .media-gallery {
+            margin-bottom: 60px;
+            padding: 30px;
+            border: 2px solid var(--bronze-gold);
+            background-color: rgba(0, 0, 0, 0.4); 
+            border-radius: 10px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .main-screenshot {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 4px solid var(--rdr-red); 
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+            transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap; 
+            justify-content: center; 
+        }
+
+        .thumbnail {
+            width: 200px; 
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            border-color: var(--rdr-red);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--bronze-gold);
+            box-shadow: 0 0 15px var(--bronze-gold);
+        }
+
+        /* Grid de Informações */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            margin-top: 60px;
+        }
+        
+        .game-description h3, .app-details h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--bronze-gold);
+            border-left: 6px solid var(--rdr-red);
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .app-details ul {
+            list-style: none;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--bronze-gold);
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .app-details li {
+            padding: 15px 20px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15); 
+            font-size: 1.1rem;
+        }
+        
+        .app-details li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--dark-leather);
+            color: var(--text-muted);
+            font-size: 1.0rem;
+            border-top: 3px solid var(--rdr-red);
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-section {
+                justify-content: center;
+            }
+            .hero-content {
+                padding-left: 0;
+                border-left: none;
+                text-align: center;
+            }
+            .game-logo {
+                max-width: 350px;
+                margin: 0 auto 15px;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .developer {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .thumbnail {
+                width: 150px;
+            }
+            .details-section h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <svg style="display: none;">
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" result="noise" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 -0.5 0" result="noise" />
+        <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
+      </filter>
+    </svg>
+
+    <main class="game-page">
+        <section class="hero-section" style="background-image: url('https://t.ctcdn.com.br/UDGg_W0boMyhnTHSLaVot6ULPFU=/20x66:1099x673/1024x576/smart/i345543.jpeg');"> 
+            <div class="hero-content">
+                <img src="https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/7abc917d6fa69155c1ddafde695ce93f.jpg" alt="Logo de Red Dead Redemption 2" class="game-logo"> 
+                
+                <h1>Red Dead Redemption 2</h1>
+                <p class="developer">Disponível para PC, Um Conto de Honra e Lealdade  | Criado por: Rockstar Games</p>
+                <a href="RedDead2PC.html" target="_blank" class="cta-button">Baixe Agora (PC)</a>
+                <a href="#details" class="scroll-down">Detalhes da Gangue Van der Linde ↓</a>
+            </div>
+        </section>
+
+        <section id="details" class="details-section">
+            <div class="container">
+                <div class="center-heading">
+                    <h2>Fora da Lei em um Mundo em Extinção</h2>
+                </div>
+                
+                <div class="media-gallery">
+                    <img id="main-image" src="https://files.tecnoblog.net/wp-content/uploads/2018/11/red-dead-2.jpg" alt="" class="main-screenshot"> 
+                    
+                    <div class="thumbnail-container">
+                        <img src="https://sm.ign.com/ign_br/screenshot/default/rdr2-screenshot-079_r86g.jpg" alt="Acampamento" class="thumbnail active" onclick="changeImage('https://i.imgur.com/example_rdr2_screenshot_1.jpg', this)">
+                        <img src="https://sm.ign.com/ign_br/screenshot/default/red-dead-redemption-2-dutch-gang-screenshot_cpcz.jpg" alt="Dutch" class="thumbnail" onclick="changeImage('https://i.imgur.com/example_rdr2_screenshot_2.jpg', this)">
+                        <img src="https://i.redd.it/2g9njmrqq7o11.jpg" alt="Paisagem Neve" class="thumbnail" onclick="changeImage('https://i.imgur.com/example_rdr2_screenshot_3.jpg', this)">
+                        <img src="https://i.redd.it/ahh-saint-denis-v0-hxds64d0cbc91.jpg?width=3840&format=pjpg&auto=webp&s=d72c70311420511106566acd663127de3b11e9af" alt="Saint Denis" class="thumbnail" onclick="changeImage('https://i.imgur.com/example_rdr2_screenshot_4.jpg', this)">
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="game-description">
+                        <h3>A Saga de Arthur Morgan</h3>
+                        <p>1899. A era do Velho Oeste está chegando ao fim. Após um assalto dar errado na cidade de Blackwater, Arthur Morgan e a gangue Van der Linde são forçados a fugir. Com agentes federais e caçadores de recompensas em seus calcanhares, a gangue deve roubar, lutar e abrir caminho pela vasta e implacável terra da América para sobreviver.</p>
+                        <p>Arthur se vê no meio de uma profunda crise de lealdade, tendo que escolher entre seus próprios ideais e a lealdade à gangue que o criou, liderada pelo idealista em decadência Dutch van der Linde.</p>
+                        <p>A versão para PC apresenta melhorias gráficas e técnicas para maior imersão, incluindo distâncias de renderização aprimoradas, iluminação e o poder de rodar a taxas de quadros (FPS) mais altas.</p>
+                    </div>
+                    
+                    <section class="app-details">
+                        <h3>Detalhes da Versão PC</h3>
+                        <ul>
+                            <li> Lançamento Original PC: 5 de Novembro de 2019</li>
+                            <li> Desenvolvedor: Rockstar Games</li>
+                            <li> Plataformas: PC (Steam, Epic Games, Rockstar Launcher)</li>
+                            <li> Conteúdo: Modo História e Red Dead Online</li>
+                            <li> Requisito Mínimo (Est.): GTX 770 2GB / RX 480 4GB, 8 GB RAM, i5-2500K</li>
+                            <li> Espaço em Disco: 150 GB (HDD/SSD)</li>
+                            <li> Classificação Indicativa: 18+ (Violência, Linguagem Forte, Referência a Drogas)</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 JT GAMES STORE - Disponível para PC</p>
+    </footer>
+
+    <script>
+        /* =================================== */
+        /* CÓDIGO JAVASCRIPT - GALERIA DE MÍDIA */
+        /* =================================== */
+
+        function changeImage(imageSrc, clickedThumbnail) {
+            const mainImage = document.getElementById('main-image');
+            
+            // Efeito de escurecimento rápido, como um "flash" de foto antiga
+            mainImage.style.filter = 'brightness(0.5)'; 
+            mainImage.style.opacity = 0;
+
+            // Espera a transição (simulando um "flash" de foto antiga)
+            setTimeout(() => {
+                mainImage.src = imageSrc;
+                mainImage.style.filter = 'brightness(1)';
+                mainImage.style.opacity = 1;
+            }, 300);
+
+            // Lógica para destacar a miniatura ativa
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+
+            clickedThumbnail.classList.add('active');
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstThumbnail = document.querySelector('.thumbnail');
+            if (firstThumbnail) {
+                // Para garantir que o script de troca de imagem funcione
+                document.getElementById('main-image').src = firstThumbnail.getAttribute('onclick').match(/'([^']*)'/)[1];
+                firstThumbnail.classList.add('active');
+            }
+        });
+
+    </script>
+</body>
+</html>
