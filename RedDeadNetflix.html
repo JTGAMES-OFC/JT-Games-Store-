@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="store-logo">JT GAMES STORE</a>
+        </div>
+    </header>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dead Redemption | JT GAMES STORE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    
+        /* =================================== */
+        /* ESTILOS CSS - RED DEAD REDEMPTION */
+        /* =================================== */
+
+        /* Configurações Globais e Variáveis de Cor */
+        :root {
+            --rdr-red: #8B0000;      /* Vermelho Bordô (Selo, Destaque) */
+            --dark-brown: #3C2A21;   /* Marrom Escuro (Fundo principal) */
+            --medium-brown: #5E4535; /* Marrom Médio (Fundo da seção) */
+            --light-tan: #D4AF7A;    /* Bege Claro (Destaque) */
+            --desert-gold: #e5b138;  /* Ouro Envelhecido (Bordas, Textos) */
+            --text-color: #f7f7e8;   /* Papel Velho/Pergaminho */
+            --text-muted: #D4AF7A;   /* Texto sutil */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-brown);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: 60px; 
+            /* Adiciona um padrão sutil de tecido ou poeira para um toque visual */
+            background-image: url('https://pixelorama.wordpress.com/wp-content/uploads/2016/02/red-dead-redemption-banner.jpg'); /* URL de exemplo para textura de velho-oeste */
+            background-blend-mode: multiply;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: rgba(60, 42, 33, 0.95); /* Marrom escuro semi-transparente */
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--rdr-red);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .store-logo {
+            color: var(--desert-gold);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .store-logo:hover {
+            color: var(--light-tan);
+        }
+
+        /* Estilos da Seção Hero */
+        .hero-section {
+            height: 100vh;
+            background-size: cover;
+            background-position: top center; /* Ajuste para melhor visualização do John Marston */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+            position: relative;
+            /* Estilo de sombra de texto para leitura em fundo escuro */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 1.0);
+        }
+        
+        /* Efeito de filtro para dar mais profundidade ao fundo */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradiente escuro para destacar o conteúdo à esquerda */
+            background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.85) 100%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 600px;
+            animation: fadeIn 2s ease-out; /* Adiciona uma animação suave */
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-logo {
+            max-width: 400px; /* Logotipo maior para RDR */
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(139, 0, 0, 0.7)); /* Sombra para destacar */
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            color: var(--desert-gold);
+            text-transform: uppercase;
+        }
+
+        .developer {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Botão de Ação (CTA) */
+        .cta-button {
+            background-color: var(--rdr-red);
+            color: var(--text-color);
+            border: 2px solid var(--desert-gold); /* Borda para um toque "Wild West" */
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none; /* Garante que links se pareçam com botões */
+            display: inline-block;
+            box-shadow: 0 5px var(--dark-brown); /* Efeito de botão 3D */
+            position: relative;
+            top: 0;
+        }
+
+        .cta-button:hover {
+            background-color: #A30000;
+            transform: scale(1.02);
+            box-shadow: 0 2px var(--dark-brown);
+            top: 3px;
+        }
+        
+        .cta-button:active {
+            box-shadow: 0 0 var(--dark-brown);
+            top: 5px;
+        }
+
+
+        .scroll-down {
+            display: block;
+            margin-top: 50px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--text-muted);
+            padding-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+        
+        .scroll-down:hover {
+            color: var(--text-color);
+        }
+
+        /* Seção de Detalhes e Mídia */
+        .details-section {
+            padding: 60px 0;
+            background-color: var(--medium-brown);
+            /* Borda sutil de papel envelhecido */
+            border-top: 5px solid var(--desert-gold);
+            border-bottom: 5px solid var(--desert-gold);
+        }
+
+        .details-section h2 {
+            font-family: 'Times New Roman', serif; /* Fonte mais "clássica" para o título */
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--desert-gold);
+            border-bottom: 3px double var(--rdr-red); /* Linha dupla para um toque vintage */
+            display: inline-block;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .center-heading {
+            text-align: center;
+        }
+        
+        .details-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .media-gallery {
+            margin-bottom: 50px;
+            padding: 20px;
+            border: 1px solid var(--light-tan);
+            background-color: rgba(0, 0, 0, 0.2); /* Fundo sutil para a galeria */
+            border-radius: 8px;
+        }
+
+        .main-screenshot {
+            width: 100%;
+            max-height: 550px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 3px solid var(--rdr-red); /* Borda de destaque */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap; 
+            justify-content: center; 
+        }
+
+        .thumbnail {
+            width: 180px; /* Miniaturas maiores */
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            border-color: var(--light-tan);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--desert-gold);
+            box-shadow: 0 0 10px var(--desert-gold);
+        }
+
+        /* Grid de Informações */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .game-description h3, .app-details h3 {
+            font-size: 2.0rem;
+            margin-bottom: 20px;
+            color: var(--rdr-red);
+            border-left: 5px solid var(--desert-gold);
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+        
+        .app-details ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--light-tan);
+            border-radius: 4px;
+        }
+        
+        .app-details li {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.05rem;
+        }
+        
+        .app-details li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--dark-brown);
+            color: var(--text-muted);
+            font-size: 1.0rem;
+            border-top: 2px solid var(--rdr-red);
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .game-logo {
+                max-width: 250px;
+            }
+            .cta-button {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+            .thumbnail {
+                width: 120px;
+            }
+            .details-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="game-page">
+        <section class="hero-section" style="background-image: url('https://i.imgur.com/example_rdr_hero.jpg');"> <div class="hero-content">
+                <img src="https://play-lh.googleusercontent.com/SBpKtn6H9H050lQaUHjP9IITtCpb03yLj2q929lLzvl68UCAdqyUWfkyvJDeOUu0Ta8=w240-h480-rw" alt="Logo de Red Dead Redemption" class="game-logo"> <h1>Red Dead Redemption</h1>
+                <p class="developer">Disponível no catálogo da Netflix Games | Criado por: Rockstar Games</p>
+                <a href="#details" class="cta-button">JOGUE EM BREVE (NO DIA DO LANÇAMENTO)</a>
+                <a href="#details" class="scroll-down">Detalhes do Velho-Oeste ↓</a>
+            </div>
+        </section>
+
+        <section id="details" class="details-section">
+            <div class="container">
+                <div class="center-heading">
+                    <h2>Embarque na Fronteira Americana</h2>
+                </div>
+                
+                <div class="media-gallery">
+               <img id="main-image" src="https://play-lh.googleusercontent.com/eMuQAixznrNYyCCidYYBTWqSl4vFkShAbXE_awD8rZA1Tt6qYwcnV1BcnQBgN55HBoPu=w2560-h1440-rw" alt="" class="main-screenshot"> <div class="thumbnail-container">
+                        <img src="https://play-lh.googleusercontent.com/E4idMCtvX132xbxKMjMjGMjm3oBdizV5tsX8LsFvKIv8YP-ceYxxo8HbunS5wwo0D2b8=w2560-h1440-rw" alt="John Marston" class="thumbnail active" onclick="changeImage('https://i.imgur.com/example_rdr_screenshot_1.jpg', this)">
+                        <img src="https://play-lh.googleusercontent.com/HGaebQXbSHlAGAFLRXi50Fd69BJgiA2teQDwhVExoPJnKSJlhziiUwVfDCGPrOJgkIk=w2560-h1440-rw" alt="Duelo" class="thumbnail" onclick="changeImage('https://i.imgur.com/example_rdr_screenshot_2.jpg', this)">
+                        <img src="https://play-lh.googleusercontent.com/ZXtwGi7eV06hQo0A9wfktayU7GOhIhBW2CWdrRsRVIU0QliwAoenVWFCvhm91Zy4zA=w2560-h1440-rw" alt="Undead Nightmare" class="thumbnail" onclick="changeImage('https://i.imgur.com/example_rdr_screenshot_3.jpg', this)">
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="game-description">
+                        <h3>A Lenda de John Marston</h3>
+                        <p>Quando agentes federais ameaçam sua família, o ex-fora da lei John Marston é forçado a caçar a gangue de criminosos que ele um dia chamou de amigos. Viva a aclamada jornada de Marston pelas extensas paisagens do Oeste Americano e do México, lutando para enterrar seu passado manchado de sangue.</p>
+                        <p>O jogo inclui a experiência completa para um jogador, além da icônica história de terror Undead Nightmare, onde uma praga zumbi domina a fronteira.</p>
+                        <p>Esta versão mobile exclusiva para membros Netflix apresenta a experiência completa, com conteúdo bônus da Edição Game of the Year.</p>
+                    </div>
+                    
+                    <section class="app-details">
+                        <h3>Informações Cruciais</h3>
+                        <ul>
+                            <li> Lançamento Netflix: 2 de Dezembro de 2025</li>
+                            <li> Desenvolvedor: Rockstar Games</li>
+                            <li> Categoria: Ação / Aventura em Mundo Aberto</li>
+                            <li> Tamanho Estimado (iOS): 3.1 GB</li>
+                            <li> Requisito: Assinatura ativa da Netflix</li>
+                            <li> Conteúdo: Jogo Principal e Expansão Undead Nightmare</li>
+                            <li> Modo de Jogo: Apenas Single-player (Não inclui multiplayer)</li>
+                            <li> Classificação Indicativa: 18+ (Violência, Linguagem Forte, Nudez, Uso de Drogas)</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Jt Games Store - Disponível na Netflix Games.</p>
+    </footer>
+
+    <script>
+        /* =================================== */
+        /* CÓDIGO JAVASCRIPT - GALERIA DE MÍDIA */
+        /* =================================== */
+
+        function changeImage(imageSrc, clickedThumbnail) {
+            const mainImage = document.getElementById('main-image');
+            
+            // Efeito de desfoque/poeira (simulação de animação de Velho Oeste)
+            mainImage.style.filter = 'blur(5px)'; 
+            mainImage.style.opacity = 0;
+
+            // Espera a transição (simulando um "flash" de foto antiga)
+            setTimeout(() => {
+                mainImage.src = imageSrc;
+                mainImage.style.filter = 'blur(0)';
+                mainImage.style.opacity = 1;
+            }, 300);
+
+            // Lógica para destacar a miniatura ativa
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+
+            clickedThumbnail.classList.add('active');
+        }
+        
+        // Inicializa a galeria com a primeira imagem
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstThumbnail = document.querySelector('.thumbnail');
+            if (firstThumbnail) {
+                // Para garantir que o script de troca de imagem funcione, mas sem o efeito de transição inicial
+                document.getElementById('main-image').src = firstThumbnail.getAttribute('onclick').match(/'([^']*)'/)[1];
+                firstThumbnail.classList.add('active');
+            }
+        });
+        
+        /* O sistema de 'maintenance-screen' foi removido pois o jogo já tem data de lançamento (2 de dezembro de 2025) e o foco é a página pronta. */
+
+    </script>
+</body>
+</html>
