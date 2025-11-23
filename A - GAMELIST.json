@@ -1,5 +1,30 @@
 {
   "games": [
+         {
+    "title": "Super Mario 64",
+    "platform": "Nintendo 64",
+    "image": "images/botw.jpg"
+  },
+     {
+    "title": "NARUTO X BORUTO Ultimate Ninja STORM CONNECTIONS",
+    "platform": "Nintendo Switch",
+    "image": "images/botw.jpg"
+  },
+          {
+    "title": "Jujutsu Kaisen Cursed Clash",
+    "platform": "Nintendo Switch",
+    "image": "images/botw.jpg"
+  },
+      {
+    "title": "Demon Slayer The Hinokami Chronicles 2",
+    "platform": "Nintendo Switch",
+    "image": "images/botw.jpg"
+  },
+      {
+    "title": "Super Mario Odissey",
+    "platform": "Nintendo Switch",
+    "image": "images/botw.jpg"
+  },
   {
     "title": "The Legend of Zelda: Breath of the Wild",
     "platform": "Nintendo Switch",
