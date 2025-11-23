@@ -1,0 +1,385 @@
+{
+  "games": [
+  {
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "platform": "Nintendo Switch",
+    "image": "images/botw.jpg"
+  },
+  {
+    "title": "The Witcher 3: Wild Hunt",
+    "platform": "PC / PS4 / Xbox One",
+    "image": "images/thewitcher3.jpg"
+  },
+  {
+    "title": "Elden Ring",
+    "platform": "PS5 / Xbox Series X/S / PC",
+    "image": "images/eldenring.jpg"
+  },
+  {
+    "title": "Mario Kart 8 Deluxe",
+    "platform": "Nintendo Switch",
+    "image": "images/mk8d.jpg"
+  },
+  {
+    "title": "Baldur's Gate 3",
+    "platform": "PC / PS5 / Xbox Series X/S",
+    "image": "images/baldursgate3.jpg"
+  },
+  {
+    "title": "The Last of Us Part I",
+    "platform": "PS5 / PC",
+    "image": "images/tlou_part1.jpg"
+  },
+  {
+    "title": "BioShock",
+    "platform": "Multi-plataforma",
+    "image": "images/bioshock.jpg"
+  },
+  {
+    "title": "Sekiro: Shadows Die Twice",
+    "platform": "Multi-plataforma",
+    "image": "images/sekiro.jpg"
+  },
+  {
+    "title": "Super Mario Odyssey",
+    "platform": "Nintendo Switch",
+    "image": "images/supermarioodyssey.jpg"
+  },
+  {
+    "title": "Bloodborne",
+    "platform": "PS4",
+    "image": "images/bloodborne.jpg"
+  },
+  {
+    "title": "Portal 2",
+    "platform": "Multi-plataforma",
+    "image": "images/portal2.jpg"
+  },
+  {
+    "title": "Mass Effect 2",
+    "platform": "Multi-plataforma",
+    "image": "images/masseffect2.jpg"
+  },
+  {
+    "title": "Disco Elysium",
+    "platform": "Multi-plataforma",
+    "image": "images/discoelysium.jpg"
+  },
+  {
+    "title": "Counter-Strike 2",
+    "platform": "PC",
+    "image": "images/cs2.jpg"
+  },
+  {
+    "title": "Animal Crossing: New Horizons",
+    "platform": "Nintendo Switch",
+    "image": "images/animalcrossing.jpg"
+  }
+    {
+      "title": "Final Fantasy VII",
+      "platform": "PS1",
+      "image": "images/ff7.jpg"
+    },
+    {
+      "title": "Resident Evil 2",
+      "platform": "PS1",
+      "image": "images/re2.jpg"
+    },
+    {
+      "title": "Resident Evil 3: Nemesis",
+      "platform": "PS1",
+      "image": "images/re3.jpg"
+    },
+    {
+      "title": "Resident Evil 1",
+      "platform": "PS1",
+      "image": "images/re1.jpg"
+    },
+    {
+      "title": "Mortal Kombat Trilogy",
+      "platform": "PS1",
+      "image": "images/mktrilogy.jpg"
+    },
+    {
+      "title": "Gran Turismo",
+      "platform": "PS1",
+      "image": "images/gt1.jpg"
+    },
+    {
+      "title": "Gran Turismo 2",
+      "platform": "PS1",
+      "image": "images/gt2.jpg"
+    },
+    {
+      "title": "Jackie Chan Stuntmaster",
+      "platform": "PS1",
+      "image": "images/jackiechan.jpg"
+    },
+    {
+      "title": "Metal Gear Solid",
+      "platform": "PS1",
+      "image": "images/mgs1.jpg"
+    },
+    {
+      "title": "Castlevania: Symphony of the Night",
+      "platform": "PS1",
+      "image": "images/sotn.jpg"
+    },
+    {
+      "title": "Pepsiman",
+      "platform": "PS1",
+      "image": "images/pepsiman.jpg"
+    },
+    {
+      "title": "Medal of Honor",
+      "platform": "PS1",
+      "image": "images/moh.jpg"
+    },
+    {
+      "title": "Crash Bandicoot",
+      "platform": "PS1",
+      "image": "images/crash1.jpg"
+    },
+    {
+      "title": "Super Mario World",
+      "platform": "SNES",
+      "image": "images/smw.jpg"
+    },
+    {
+      "title": "Super Mario Bros. 2",
+      "platform": "SNES",
+      "image": "images/smb2.jpg"
+    },
+    {
+      "title": "Super Mario World 2: Yoshi's Island",
+      "platform": "SNES",
+      "image": "images/yoshiisland.jpg"
+    },
+    {
+      "title": "Super Mario All-Stars",
+      "platform": "SNES",
+      "image": "images/allstars.jpg"
+    },
+    {
+      "title": "Super Castlevania IV",
+      "platform": "SNES",
+      "image": "images/castlevania4.jpg"
+    },
+    {
+      "title": "Mega Man X",
+      "platform": "SNES",
+      "image": "images/mmx.jpg"
+    },
+    {
+      "title": "Super Bomberman",
+      "platform": "SNES",
+      "image": "images/bomberman.jpg"
+    },
+    {
+      "title": "GTA V",
+      "platform": "PS3",
+      "image": "images/gtav.jpg"
+    },
+    {
+      "title": "God of War III",
+      "platform": "PS3",
+      "image": "images/gow3.jpg"
+    },
+    {
+      "title": "Red Dead Redemption",
+      "platform": "PS3",
+      "image": "images/rdr.jpg"
+    },
+    {
+      "title": "GTA IV",
+      "platform": "PS3",
+      "image": "images/gtaiv.jpg"
+    },
+    {
+      "title": "Red Dead Redemption 2",
+      "platform": "PC",
+      "image": "images/rdr2.jpg"
+    },
+    {
+      "title": "Red Dead Redemption",
+      "platform": "PC",
+      "image": "images/rdr1pc.jpg"
+    },
+    {
+      "title": "Max Payne & Max Payne 2",
+      "platform": "PC",
+      "image": "images/maxpaynecollection.jpg"
+    },
+    {
+      "title": "Monster Hunter Freedom",
+      "platform": "PSP",
+      "image": "images/mhf.jpg"
+    },
+    {
+      "title": "Pro Evolution Soccer 6",
+      "platform": "PSP",
+      "image": "images/pes6psp.jpg"
+    },
+    {
+      "title": "Dragon Ball Z: Shin Budokai",
+      "platform": "PSP",
+      "image": "images/dbzsb.jpg"
+    },
+    {
+      "title": "GTA: San Andreas",
+      "platform": "PS2",
+      "image": "images/sanandreas.jpg"
+    },
+    {
+      "title": "Black",
+      "platform": "PS2",
+      "image": "images/black.jpg"
+    },
+    {
+      "title": "Dragon Ball Z: Budokai Tenkaichi 3",
+      "platform": "PS2",
+      "image": "images/dbzbt3.jpg"
+    },
+    {
+      "title": "Dragon Ball Z: Budokai Tenkaichi 2",
+      "platform": "PS2",
+      "image": "images/dbzbt2.jpg"
+    },
+    {
+      "title": "Dragon Ball Z: Budokai Tenkaichi 1",
+      "platform": "PS2",
+      "image": "images/dbzbt1.jpg"
+    },
+    {
+      "title": "GTA 3",
+      "platform": "PS2",
+      "image": "images/gta3.jpg"
+    },
+    {
+      "title": "GTA: Vice City",
+      "platform": "PS2",
+      "image": "images/vicecity.jpg"
+    },
+    {
+      "title": "Shadow of the Colossus",
+      "platform": "PS2",
+      "image": "images/sotc.jpg"
+    },
+    {
+      "title": "The King of Fighters 2002",
+      "platform": "PS2",
+      "image": "images/kof2002.jpg"
+    },
+    {
+      "title": "God of War: Ghost of Sparta",
+      "platform": "PSP",
+      "image": "images/gowgos.jpg"
+    },
+    
+    {
+      "title": "Red Dead Redemption NETFLIX",
+      "platform": "Ação / Faroeste",
+      "image": "images/rdr_netflix.jpg"
+    },
+    {
+      "title": "Cuphead GabeDeveloper",
+      "platform": "Ação / Indie",
+      "image": "images/cuphead_gaber.jpg"
+    },
+    {
+      "title": "Cuphead Jt Games",
+      "platform": "Ação / Indie",
+      "image": "images/cuphead_jt.jpg"
+    },
+    {
+      "title": "Aethersx2",
+      "platform": "Emulador",
+      "image": "images/aethersx2.jpg"
+    },
+    {
+      "title": "Hollow Knight",
+      "platform": "Metroidvania",
+      "image": "images/hollowknight.jpg"
+    },
+    {
+      "title": "Hollow Knight SilkSong",
+      "platform": "Metroidvania",
+      "image": "images/silksong.jpg"
+    },
+    {
+      "title": "NetherSx2",
+      "platform": "Emulador",
+      "image": "images/nethersx2.jpg"
+    },
+    {
+      "title": "UNDERTALE",
+      "platform": "RPG",
+      "image": "images/undertale.jpg"
+    },
+    {
+      "title": "Minecraft Java",
+      "platform": "Aventura / Emulador",
+      "image": "images/minecraftjava.jpg"
+    },
+    {
+      "title": "Z Legends",
+      "platform": "Ação",
+      "image": "images/zlegends.jpg"
+    },
+    {
+      "title": "Bully",
+      "platform": "Ação / Mundo Aberto",
+      "image": "images/bully.jpg"
+    },
+    {
+      "title": "GTA: San Andreas",
+      "platform": "Ação / Mundo Aberto",
+      "image": "images/gta_sanandreas_mobile.jpg"
+    },
+    {
+      "title": "Driver 3",
+      "platform": "PS2",
+      "image": "images/driver3.jpg"
+    },
+    {
+      "title": "Resident Evil 4",
+      "platform": "PS2",
+      "image": "images/re4_ps2.jpg"
+    },
+    {
+      "title": "Final Fantasy X",
+      "platform": "PS2",
+      "image": "images/ffx.jpg"
+    },
+    {
+      "title": "Metal Gear Solid 3",
+      "platform": "PS2",
+      "image": "images/mgs3.jpg"
+    },
+    {
+      "title": "Kingdom Hearts",
+      "platform": "PS2",
+      "image": "images/kingdomhearts.jpg"
+    },
+    {
+      "title": "God of War II",
+      "platform": "PS2",
+      "image": "images/gow2.jpg"
+    },
+    {
+      "title": "Persona 3 Portable",
+      "platform": "PSP",
+      "image": "images/p3p.jpg"
+    },
+    {
+      "title": "Patapon",
+      "platform": "PSP",
+      "image": "images/patapon.jpg"
+    },
+    {
+      "title": "Crash Bandicoot",
+      "platform": "PS1",
+      "image": "images/crash_ps3.jpg"
+    }
+  ]
+}
