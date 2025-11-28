@@ -1,5 +1,10 @@
 {
   "games": [
+             {
+    "title": "Sonic Gnerations",
+    "platform": "Ps3",
+    "image": "images/botw.jpg"
+  },
          {
     "title": "Super Mario 64",
     "platform": "Nintendo 64",
