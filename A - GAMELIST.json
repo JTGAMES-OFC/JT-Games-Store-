@@ -37,12 +37,12 @@
   },
   {
     "title": "The Witcher 3: Wild Hunt",
-    "platform": "PC / PS4 / Xbox One",
+    "platform": "PC",
     "image": "images/thewitcher3.jpg"
   },
   {
     "title": "Elden Ring",
-    "platform": "PS5 / Xbox Series X/S / PC",
+    "platform": "PC",
     "image": "images/eldenring.jpg"
   },
   {
@@ -51,34 +51,15 @@
     "image": "images/mk8d.jpg"
   },
   {
-    "title": "Baldur's Gate 3",
-    "platform": "PC / PS5 / Xbox Series X/S",
-    "image": "images/baldursgate3.jpg"
-  },
-  {
     "title": "The Last of Us Part I",
-    "platform": "PS5 / PC",
+    "platform": "PC",
     "image": "images/tlou_part1.jpg"
   },
   {
-    "title": "BioShock",
-    "platform": "Multi-plataforma",
-    "image": "images/bioshock.jpg"
-  },
-  {
-    "title": "Sekiro: Shadows Die Twice",
-    "platform": "Multi-plataforma",
-    "image": "images/sekiro.jpg"
-  },
   {
     "title": "Super Mario Odyssey",
     "platform": "Nintendo Switch",
     "image": "images/supermarioodyssey.jpg"
-  },
-  {
-    "title": "Bloodborne",
-    "platform": "PS4",
-    "image": "images/bloodborne.jpg"
   },
   {
     "title": "Portal 2",
