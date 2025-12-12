@@ -9,6 +9,59 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
   
+    .jt-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+
+.jt-modal {
+  background: #000;      /* fundo preto */
+  color: #fff;           /* texto branco */
+  padding: 25px;
+  border-radius: 14px;
+  max-width: 430px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 18px rgba(255,255,255,0.15);
+  animation: popup 0.35s ease;
+}
+
+  .jt-modal h2 {
+    margin-bottom: 12px;
+    font-size: 22px;
+  }
+
+  .jt-modal ul {
+    text-align: left;
+    margin: 15px 0;
+    padding-left: 20px;
+  }
+
+  #att-fechar {
+    background: #0066ff;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  #att-fechar:hover {
+    background: #004fcc;
+  }
+
+  @keyframes popup {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
   /* Estilo das Abas (Estilo Steam) */
 .home_tab {
     background-color: rgba(39, 57, 78, 0.8);
@@ -146,20 +199,35 @@
   </style>
 </head>
 
+
   <!-- Tela de novidades -->
   <div id="novidades" style="display:none;">
     <div id="novidades-content">
       <h2>Bem-vindo à nova JT Games Store!</h2>
-      <p>Você está usando a versão <strong>2.0.1123.06</strong>, com Novas Adições:</p>
+      <p>Você está usando a versão <strong>2.0.1212.07</strong>, com Novas Adições:</p>
       <ul>
-        <li> Adição de novos jogos em N64 e Nintendo switch.</li>
-        <li> Adição de novas categorias Nintendo 64 e Nintendo switch. </li>
-        <li>Páginas Adicionadas de TODOS os jogos dia 29/11 </li>
+        <li> Optimização no site</li>
+        <li> Nova Atualização Programada </li>
       </ul>
       <button id="fechar">Fechar</button>
     </div>
   </div>
 
+
+<div id="aviso-att" class="jt-overlay" style="display:none;">
+  <div class="jt-modal">
+    <h2>⚠ Atualização Programada</h2>
+    <p>A JT Games Store passará por uma grande atualização no dia <strong>25/12</strong>.</p>
+    
+    <ul>
+      <li>🆕 Adições significativas ao site</li>
+      <li>🛠 Melhorias internas</li>
+      <li>🌐 Alguns serviços podem ficar offline temporariamente</li>
+    </ul>
+
+    <button id="att-fechar">Entendi</button>
+  </div>
+</div>
 
 <body class="bg-gray-950 text-gray-200">
 
@@ -1238,7 +1306,7 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
       <div>
         <h3 class="font-semibold text-white">JT Games Store</h3>
-        <h3 class="font-semibold text-white">Versão 2.0.1124.06</h3>
+        <h3 class="font-semibold text-white">Versão 2.0.1212.07</h3>
         <p class="mt-2">Sua loja digital de jogos.</p>
       </div>
       <div>
@@ -1315,6 +1383,15 @@ if (searchInputDesktop) {
   
   // CODIGOS A PARTIR DAQui
   
+    window.onload = function() {
+    document.getElementById("aviso-att").style.display = "flex";
+  }
+
+  // Fechar o pop-up
+  document.getElementById("att-fechar").onclick = function() {
+    document.getElementById("aviso-att").style.display = "none";
+  }
+  
     // NOVO CÓDIGO PARA GERENCIAR O LOGIN
   document.addEventListener('DOMContentLoaded', () => {
     const userSection = document.getElementById('user-section');
@@ -1375,7 +1452,7 @@ if (searchInputDesktop) {
     }
   
           // Defina a versão atual do app
-    const versaoAtual = "2.0.1101.06";
+    const versaoAtual = "2.0.1212.06";
 
     // Pega do localStorage a última versão que o usuário já viu
     const versaoVista = localStorage.getItem("jtgames_versao");
