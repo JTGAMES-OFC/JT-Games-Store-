@@ -2,6 +2,16 @@
 
 {
   "games": [
+                 {
+    "title": "Far Cry 3",
+    "platform": "Ps3",
+    "image": "images/botw.jpg"
+  },
+                 {
+    "title": "Maneater",
+    "platform": "Android",
+    "image": "images/botw.jpg"
+  },
              {
     "title": "Sonic Gnerations",
     "platform": "Ps3",
