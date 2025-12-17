@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo Switch ROMs JT Games Store</title>
+    <style>
+        /* Estilos CSS Incorporados */
+        :root {
+            --cor-fundo: #121212; /* Fundo escuro, mais alinhado */
+            --cor-card: #1e1e1e; /* Cor de fundo dos cards */
+            --cor-texto: #f0f0f0;
+            --cor-accent-switch-r: #e60012; /* Vermelho do Switch */
+            --cor-accent-switch-b: #0093d5; /* Azul do Switch */
+            --cor-destaque: #00aaff; /* Azul claro para links e botões */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 40px;
+            border-bottom: 3px solid var(--cor-accent-switch-b); /* Borda azul do Switch */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+
+        /* Título Clicável para a Index */
+        header a {
+            color: var(--cor-texto);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        header a:hover {
+            color: var(--cor-destaque);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 10px;
+        }
+
+        .titulo-secao {
+            font-size: 1.8em;
+            color: var(--cor-accent-switch-r); /* Títulos em vermelho do Switch */
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .lista-roms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 0;
+        }
+
+        .rom-card {
+            background-color: var(--cor-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .rom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 10px var(--cor-accent-switch-b);
+        }
+
+        .rom-card img {
+            width: 100%;
+            height: auto;
+            max-width: 150px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+        }
+
+        .rom-card h3 {
+            margin: 5px 0 15px 0;
+            font-size: 1.1em;
+            color: var(--cor-texto);
+        }
+
+        .btn-download {
+            display: block;
+            background-color: var(--cor-destaque);
+            color: #121212;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .btn-download:hover {
+            background-color: #0099e6;
+        }
+
+        footer {
+            background-color: #000;
+            color: #777;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 50px;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <h1>JT Games Store <span style="color: var(--cor-accent-switch-b);"></span> </h1>
+        </a>
+    </header>
+
+    <div class="container">
+
+        <h2 class="titulo-secao">️ Biblioteca Ps2</h2>
+
+        <section>
+            <h3 class="titulo-secao" style="color: var(--cor-accent-switch-b); border-bottom: none;">Jogos .ISO</h3>
+            <div class="lista-roms">
+                <div class="rom-card">
+                    <img src="https://i.pinimg.com/474x/52/2c/d9/522cd91e10f58980b35998afa556348e.jpg" alt="Capa Jogo 1">
+                    <h3>Resident Evil 4</h3>
+                    <a href="download/zelda.zip" class="btn-download">Baixar ROM</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD5NilxRlsr4e2WvblLkJncKCIdyyvMi4x3A&s" alt="Capa Jogo 2">
+                    <h3>Metal Gear Solid 3</h3>
+                    <a href="download/mario.zip" class="btn-download">Baixar ROM</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://m.media-amazon.com/images/I/918AUL+i-DL.jpg" alt="Capa Jogo 3">
+                    <h3>Kingdom Hearts</h3>
+                    <a href="download/pokemon.zip" class="btn-download">Baixar ROM</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/677af80a-4f37-4a8c-8228-1dc57a31cf6f/dimb5ft-01d1ce37-4c1a-470e-9d93-6901c0173b9c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi82NzdhZjgwYS00ZjM3LTRhOGMtODIyOC0xZGM1N2EzMWNmNmYvZGltYjVmdC0wMWQxY2UzNy00YzFhLTQ3MGUtOWQ5My02OTAxYzAxNzNiOWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.h9pJTy3Sf9j1rEs6q_9vMG6L0LV-LMx5V03cjGhZ6M8" alt="Capa Jogo 4">
+                    <h3>GTA: San Andreas</h3>
+                    <a href="download/hogwarts.zip" class="btn-download">Baixar ROM</a>
+                </div>
+                
+                <div class="rom-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ7tc3WnS_p_4CelX65ijme5z8uYhpN24UTw&s" alt="Capa Jogo 5">
+                    <h3>Shadow of the Colossus</h3>
+                    <a href="download/acnh.zip" class="btn-download">Baixar ROM</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhC96v8bmW_bHMXAq8Ck9bjAF_N8tigXR7Qe7lR1-ckCzszsKp83WFdf10x4cb_8eDGn3TQML-MCaQMo3FWSHFopXKHANChsA8zenyo-N45LagRcVS1Qa6BYzqEd2SdEpUheBvKV4r_55g6/?imgmax=800" alt="Capa Jogo 5">
+                    <h3>Black</h3>
+                    <a href="download/acnh.zip" class="btn-download">Baixar ROM</a>
+                </div>
+                
+                                <div class="rom-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuthuczxW36OmOEuwOVbRPQtF9ky6lPPouSw&s" alt="Capa Jogo 5">
+                    <h3> Dragon Ball Z: Budokai Tenkaichi 3</h3>
+                    <a href="download/acnh.zip" class="btn-download">Baixar ROM</a>
+                </div>
+                
+
+            </div>
+
+    <footer>
+        JT Games Store &copy; 2025
+    </footer>
+
+</body>
+</html>
