@@ -2,6 +2,16 @@
 
 {
   "games": [
+                     {
+    "title": "Naruto Shippuden: Ultimate Ninja 5",
+    "platform": "Ps2",
+    "image": "images/botw.jpg"
+  },
+                 {
+    "title": "Need for Speed: Underground 2",
+    "platform": "Ps2",
+    "image": "images/botw.jpg"
+  },
                  {
     "title": "Far Cry 3",
     "platform": "Ps3",
