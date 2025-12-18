@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS1 ROMs JT Games Store</title>
+    <style>
+        /* Estilos CSS Incorporados */
+        :root {
+            --cor-fundo: #121212; /* Fundo escuro, mais alinhado */
+            --cor-card: #1e1e1e; /* Cor de fundo dos cards */
+            --cor-texto: #f0f0f0;
+            --cor-accent-switch-r: #e60012; /* Vermelho do Switch */
+            --cor-accent-switch-b: #0093d5; /* Azul do Switch */
+            --cor-destaque: #00aaff; /* Azul claro para links e botões */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 40px;
+            border-bottom: 3px solid var(--cor-accent-switch-b); /* Borda azul do Switch */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+
+        /* Título Clicável para a Index */
+        header a {
+            color: var(--cor-texto);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        header a:hover {
+            color: var(--cor-destaque);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 10px;
+        }
+
+        .titulo-secao {
+            font-size: 1.8em;
+            color: var(--cor-accent-switch-r); /* Títulos em vermelho do Switch */
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .lista-roms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 0;
+        }
+
+        .rom-card {
+            background-color: var(--cor-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .rom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 10px var(--cor-accent-switch-b);
+        }
+
+        .rom-card img {
+            width: 100%;
+            height: auto;
+            max-width: 150px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+        }
+
+        .rom-card h3 {
+            margin: 5px 0 15px 0;
+            font-size: 1.1em;
+            color: var(--cor-texto);
+        }
+
+        .btn-download {
+            display: block;
+            background-color: var(--cor-destaque);
+            color: #121212;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .btn-download:hover {
+            background-color: #0099e6;
+        }
+
+        footer {
+            background-color: #000;
+            color: #777;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 50px;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <h1>JT Games Store <span style="color: var(--cor-accent-switch-b);"></span> </h1>
+        </a>
+    </header>
+
+    <div class="container">
+
+        <h2 class="titulo-secao"></h2>
+
+        <section>
+            <h3 class="titulo-secao" style="color: var(--cor-accent-switch-b); border-bottom: none;">Jogos e Apps</h3>
+            <div class="lista-roms">
+                <div class="rom-card">
+                    <img src="https://play-lh.googleusercontent.com/SBpKtn6H9H050lQaUHjP9IITtCpb03yLj2q929lLzvl68UCAdqyUWfkyvJDeOUu0Ta8=w240-h480-rw" alt="Capa Jogo 1">
+                    <h3>Red Dead Redemption NETFLIX</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://www.adrenaline.com.br/wp-content/uploads/2023/07/hollow-knight-silksong-capa.jpg" alt="Capa Jogo 2">
+                    <h3>Hollow Knight SilkSong</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/1619987722169-VV6ZASHHZNRBJW9X0PLK/Key_Art_02_layeredjpg.jpg?format=1500w" alt="Capa Jogo 3">
+                    <h3>Hollow Knight</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://notadogame.com/uploads/game/cover/250x/5bfdc496d5db3.jpg" alt="Capa Jogo 4">
+                    <h3>Bully</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+                
+                <div class="rom-card">
+                    <img src="https://play-lh.googleusercontent.com/XRlCpj22PFJuFK43QcE3u5RxmoNUed7YO_zG-6F1PCqjrBIIURbTBDvTgLVVIk5pNeY=w240-h480-rw" alt="Capa Jogo 5">
+                    <h3>GTA: San Andreas</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+
+                <div class="rom-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDYVrtJU9Sto-xkAXZNoYfbVactu-RBfOccKBfp_w6XLJ9lBKohUwZlxw&s=10" alt="Capa Jogo 5">
+                    <h3>Cuphead GabeDeveloper</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+                
+                                <div class="rom-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqwo_am-X2hTwxhTFbNPq30ikouP2kqu2eRw&s" alt="Capa Jogo 5">
+                    <h3>Minecraft Java ZALITH </h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+                
+                                <div class="rom-card">
+                    <img src="https://dn721609.ca.archive.org/0/items/NSX2-RLS/logo_light.png" alt="Capa Jogo 5">
+                    <h3> NetherSx2</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+                
+                                                <div class="rom-card">
+                    <img src="https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA09239_00/1/i_691ab24757a01bfc94c6f293abd4fac52478bdac0d5829388ceb9a4e4da9c7d1/i/icon0.png" alt="Capa Jogo 5">
+                    <h3> Undertale</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+                
+                                                <div class="rom-card">
+                    <img src="https://unlockallcharacters.com/wp-content/uploads/2025/06/Z-Legends-3-Icon-new-1.webp" alt="Capa Jogo 5">
+                    <h3> Z Legends</h3>
+                    <a href="#" class="btn-download">Baixar</a>
+                </div>
+                
+                
+
+            </div>
+
+    <footer>
+        JT Games Store &copy; 2025
+    </footer>
+
+</body>
+</html>
