@@ -148,7 +148,7 @@
     "image": "images/botw.jpg"
   },
              {
-    "title": "Sonic Gnerations",
+    "title": "Sonic Generations",
     "platform": "Ps3",
     "image": "images/botw.jpg"
   },
@@ -173,7 +173,7 @@
     "image": "images/botw.jpg"
   },
       {
-    "title": "Super Mario Odissey",
+    "title": "Super Mario Odyssey",
     "platform": "Nintendo Switch",
     "image": "images/botw.jpg"
   },
@@ -201,12 +201,6 @@
     "title": "The Last of Us Part I",
     "platform": "PC",
     "image": "images/tlou_part1.jpg"
-  },
-  {
-  {
-    "title": "Super Mario Odyssey",
-    "platform": "Nintendo Switch",
-    "image": "images/supermarioodyssey.jpg"
   },
   {
     "title": "Portal 2",
