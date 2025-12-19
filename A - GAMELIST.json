@@ -1,7 +1,12 @@
-//adicionar jogos q faltam pc e switch, analisar//
+//adicionar jogos q faltam pc e switch, analisar// 
 
 {
   "games": [
+                         {
+    "title": "007 - Agent Under Fire",
+    "platform": "Ps2",
+    "image": "images/botw.jpg"
+  },
                      {
     "title": "Naruto Shippuden: Ultimate Ninja 5",
     "platform": "Ps2",
