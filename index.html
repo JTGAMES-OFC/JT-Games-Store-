@@ -1,63 +1,517 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JT Games Store - Manutenção</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  
-  <style>
-    body { font-family: 'Inter', sans-serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    /* Animação suave para o aviso */
-    @keyframes pulse-slow {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-    .animate-pulse-slow {
-      animation: pulse-slow 4s ease-in-out infinite;
-    }
-  </style>
+    <title>JT Games Store | Comparador de Preços e Ofertas Oficiais</title>
+    <meta name="description" content="Encontre os melhores preços de jogos para PC, PS5, Xbox e Nintendo Switch. Comparador em tempo real da Steam, PSN, Epic Games.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="JT Games Store">
+    <meta name="theme-color" content="#8257e5">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #09090b;
+            --bg-card: #18181b;
+            --primary: #8257e5; 
+            --primary-glow: rgba(130, 87, 229, 0.5);
+            --accent: #04d361; 
+            --danger: #f75a68; 
+            --dlc-color: #f59e0b; /* Cor Laranja para DLCs */
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+        }
+        
+        /* --- NOVO CSS PARA DLCs HORIZONTAIS --- */
+        
+        /* Altera a grade apenas da seção de DLCs para aceitar cards mais largos */
+        #dlc-grid {
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        }
+
+        /* Se o card tiver a classe 'is-dlc-card', muda a proporção da imagem */
+        .is-dlc-card .card-poster {
+             /* Muda de vertical (2/3) para horizontal widescreen (16/9) */
+            aspect-ratio: 16 / 9; 
+        }
+        
+        /* Ajuste opcional: em telas pequenas, a fonte do nome pode ficar muito grande no card horizontal */
+        .is-dlc-card .game-name {
+             font-size: 0.95rem;
+             margin-top: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); overflow-x: hidden; }
+
+        .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 0 20px var(--primary-glow); }
+        .btn-primary:hover { background: #6f42c1; transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(130, 87, 229, 0.05); }
+        
+        header { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; }
+        .logo i, .logo span { color: var(--primary); }
+        .search-container { flex: 1; max-width: 400px; margin: 0 2rem; position: relative; }
+        .search-input { width: 100%; background: #27272a; border: 1px solid #3f3f46; padding: 10px 20px; border-radius: 50px; color: white; outline: none; }
+        .nav-menu { display: flex; gap: 20px; align-items: center; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-link:hover { color: white; }
+
+        .hero { 
+            height: 80vh; 
+            background-position: center top;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%); 
+            transition: background-image 0.8s ease-in-out;
+        }
+
+        .hero::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(90deg, #09090b 0%, rgba(9,9,11,0.4) 100%); 
+            z-index: 1;
+        }
+
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 2rem; 
+            width: 100%; 
+        }
+        
+        #hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; max-width: 800px; }
+        #hero-desc { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
+        .hero-price { display: block; font-size: 2rem; color: var(--accent); font-weight: 800; margin-bottom: 30px; }
+
+        .trust-bar { max-width: 1300px; margin: -40px auto 40px; background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(130, 87, 229, 0.2); border-radius: 20px; padding: 2rem; position: relative; z-index: 100; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .feature-item { display: flex; align-items: center; gap: 15px; }
+        .feature-icon { font-size: 1.4rem; color: var(--accent); }
+
+        .main-container { max-width: 1400px; margin: 3rem auto; padding: 0 2rem; }
+        .section-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 2rem; }
+        .section-title { font-size: 1.8rem; font-weight: 700; }
+        .section-title span { color: var(--primary); }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; }
+
+        .game-card { background: transparent; border-radius: 12px; position: relative; transition: 0.4s; text-decoration: none; color: inherit; display: block; cursor: pointer; }
+        .game-card:hover { transform: translateY(-10px); }
+        .card-poster { width: 100%; aspect-ratio: 2/3; border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); background: #111; }
+        .card-poster img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
+        
+        .discount-tag { position: absolute; top: 10px; right: 10px; background: var(--danger); color: white; padding: 4px 8px; border-radius: 6px; font-weight: 800; font-size: 0.8rem; z-index: 2; }
+        
+        /* Badge específica para DLC */
+        .dlc-badge { 
+            position: absolute; top: 10px; left: 10px; 
+            background: rgba(0,0,0,0.8); color: var(--dlc-color); 
+            padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; 
+            border: 1px solid var(--dlc-color); z-index: 2; 
+        }
+        
+        .card-info { margin-top: 12px; }
+        .game-name { font-size: 1rem; font-weight: 600; margin-bottom: 4px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .price-new { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+        .price-old { color: var(--text-muted); text-decoration: line-through; font-size: 0.85rem; margin-right: 8px; font-weight: 400; }
+        .price-loading { color: var(--muted); font-size: 0.8rem; font-style: italic; }
+
+        .status-monitor { background: rgba(4, 211, 97, 0.05); border: 1px solid rgba(4, 211, 97, 0.2); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+        .status-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        .ad-banner { background: linear-gradient(90deg, #18181b 0%, #2e1065 100%); border-radius: 16px; padding: 40px; margin: 20px 0 60px 0; border: 1px solid rgba(130, 87, 229, 0.3); display: flex; justify-content: space-between; align-items: center; }
+        .ad-content h3 { font-size: 2rem; margin-bottom: 10px; }
+        .ad-content p { color: var(--text-muted); max-width: 500px; }
+
+        footer { background: #050505; border-top: 1px solid #27272a; padding: 4rem 0 2rem; margin-top: 5rem; }
+        .footer-grid { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; }
+        .footer-col h5 { color: white; margin-bottom: 1.5rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--primary); }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            .search-container, .nav-menu { display: none; }
+            .ad-banner { flex-direction: column; text-align: center; gap: 20px; align-items: center; }
+        }
+    </style>
 </head>
+<body>
 
-<body class="bg-gray-950 text-gray-200 flex items-center justify-center min-h-screen p-6">
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-ghost"></i> JT Games <span>Store</span></a>
+            <div class="search-container">
+                <input type="text" id="desktopSearchInput" class="search-input" placeholder="Buscar jogos oficiais...">
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">PC</a>
+                <a href="#" class="nav-link">PlayStation</a>
+                <a href="#" class="nav-link">Xbox</a>
+            </nav>
+            <div style="display:flex; gap:12px; align-items:center;">
+                <a href="#anuncie" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);"><i class="fas fa-ad"></i> Anuncie Aqui</a>
+            </div>
+        </div>
+    </header>
 
-  <div class="max-w-md w-full text-center">
-    <div class="bg-gray-900 border-2 border-yellow-600 p-8 rounded-2xl shadow-2xl animate-pulse-slow">
-      
-      <div class="text-6xl mb-6">⚠️</div>
-      
-      <h2 class="text-yellow-500 font-bold text-2xl mb-4 tracking-tight uppercase">
-        Servidor em Manutenção
-      </h2>
-      
-      <p class="mb-8 text-gray-300 leading-relaxed">
-        A <strong>JT Games Store</strong> está passando por uma atualização programada. O acesso ao catálogo de jogos está temporariamente suspenso.
-      </p>
-      
-      <div class="text-left bg-black/50 p-6 rounded-xl border border-gray-700">
-        <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3 text-center">Previsão de Retorno</p>
-        
-        <div class="flex items-center justify-center space-x-3 text-yellow-400 mb-2">
-          <span class="text-xl">📅</span>
-          <span class="font-bold text-lg">09 de Janeiro (09/01)</span>
+<section class="hero" id="hero-banner">
+    <div class="hero-content">
+        <h1 id="hero-title">CARREGANDO...</h1>
+        <p id="hero-desc">Compare preços em todas as plataformas oficiais.</p>
+        <span class="hero-price">---</span>
+        <div style="display:flex; gap: 15px;">
+            <a href="#" id="hero-link" class="btn btn-outline"><i class="fab fa-steam"></i> Ver na Steam</a>
         </div>
-        
-        <div class="flex items-center justify-center space-x-3 text-yellow-400">
-          <span class="text-xl">🕒</span>
-          <span class="font-bold text-lg">Às 16:00 horas</span>
-        </div>
-      </div>
-      
-      <p class="text-xs text-gray-500 mt-8 italic">
-        Agradecemos a sua compreensão.
-      </p>
     </div>
-    
-    <p class="mt-6 text-gray-600 text-sm font-medium">© 2025-2026 JT Games Store</p>
-  </div>
+</section>
 
+    <div class="trust-bar">
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <div><h4>Lojas Oficiais</h4><p>Análise PSN, Xbox, Steam e Epic.</p></div>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-bolt feature-icon"></i>
+                <div><h4>Sincronizado</h4><p>Preços atualizados via servidor.</p></div>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check-circle feature-icon"></i>
+                <div><h4>100% Legal</h4><p>Sem pirataria ou mercado cinza.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-container">
+        
+        <div class="status-monitor">
+            <div class="status-dot"></div>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent);">SERVIDOR ONLINE:</span>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Analisando ofertas reais em tempo real em 5 lojas oficiais.</span>
+        </div>
+
+        <div class="section-header" style="align-items: center; margin-bottom: 2rem;">
+            <h2 class="section-title">Grandes <span>Ofertas Analisadas</span></h2>
+            <a href="todos-jogos.html" target="_blank" class="nav-link" style="color: var(--primary); font-size: 0.9rem;">Ver Top Sellers Steam <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="games-grid" id="featured-grid"></div>
+
+        <div class="section-header" style="margin-top: 60px; align-items: center;">
+            <h2 class="section-title"><i class="fas fa-puzzle-piece" style="color: var(--dlc-color); margin-right:10px;"></i>Expansões <span>& DLCs</span></h2>
+            <a href="#" class="nav-link" style="color: var(--dlc-color); font-size: 0.9rem;">Ver todas DLCs <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="games-grid" id="dlc-grid"></div>
+
+        <section class="ad-banner" id="anuncie">
+            <div class="ad-content">
+                <h3>Sua Marca Aqui na JT Games</h3>
+                <p>Alcance milhares de jogadores que buscam ofertas reais. Oferecemos espaços exclusivos para parcerias oficiais.</p>
+            </div>
+            <a href="mailto:anuncie@jtgames.com" class="btn btn-primary" style="padding: 15px 40px; font-size: 1rem;">Anunciar Agora</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px;">JT Games <span>Store</span></div>
+                <p>A maior plataforma de curadoria e comparação de preços oficiais do Brasil. 100% seguro.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Lojas Monitoradas</h5>
+                <ul>
+                    <li><a href="https://store.steampowered.com/"><i class="fab fa-steam"></i> Steam Store</a></li>
+                    <li><a href="https://store.playstation.com/"><i class="fab fa-playstation"></i> PS Store</a></li>
+                    <li><a href="https://www.xbox.com/"><i class="fab fa-xbox"></i> Xbox Store</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Institucional</h5>
+                <ul>
+                    <li><a href="#anuncie" style="color: var(--primary); font-weight: 800;">Anuncie Conosco</a></li>
+                    <li><a href="sobrenos.html">Sobre Nós</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; color: #444; border-top: 1px solid #222; padding-top: 2rem; margin-top: 40px;">
+            <p style="color: var(--accent); margin-bottom: 10px; font-size: 0.8rem;"><i class="fas fa-server"></i> Servidor v 3.0.0202.10 sincronizado online.</p>
+            <p>&copy; 2026 JT Games Store. Redirecionamento 100% oficial.</p>
+        </div>
+    </footer>
+
+    <script>
+    // --- CONFIGURAÇÃO ---
+    const PROXY = "https://corsproxy.io/?"; 
+    
+    // Lista EXATA de jogos do Index (63) com suas imagens personalizadas
+    const FEATURED_GAMES = [
+        { id: "2050650", nome: "Resident Evil 4", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/library_600x900.jpg" },
+        { id: "2322010", nome: "God of War Ragnarök", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/library_600x900.jpg" },
+        { id: "1551360", nome: "Forza Horizon 5", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/library_600x900.jpg" },
+        { id: "990080", nome: "Hogwarts Legacy", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/library_600x900.jpg" },
+        { id: "1817190", nome: "Marvel's Spider-Man 2", customImg: "https://assets.nuuvem.com/image/upload/t_boxshot_big/v1/products/67866d6701aa3ecf48360a66/boxshot/idxvrlos0canurm7uu4w.jpg?t=1763569811" },
+        { id: "1174180", nome: "Red Dead Redemption 2", customImg: "https://m.media-amazon.com/images/I/71nlEoSrewL._AC_UF894,1000_QL80_.jpg" },
+        { id: "1245620", nome: "Elden Ring Shadow of the Erdtree", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg?t=1748630546" },
+        { id: "1091500", nome: "Cyberpunk 2077", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/library_600x900.jpg" },
+        { id: "275850", nome: "No Man's Sky", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/275850/library_600x900.jpg" },
+        { id: "1426210", nome: "It Takes Two", customImg: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/library_600x900.jpg" },
+        { id: "2239550", nome: "Watch Dogs: Legion", customImg: "https://store.ubisoft.com/on/demandware.static/-/Sites-masterCatalog/pt/dwa8fa127b/images/large/5cec2d5839798c0870c07698.jpg" }
+    ];
+
+    // --- NOVA LISTA DE DLCs ---
+// --- LISTA DE DLCs CORRIGIDA (Com imagens) ---
+const DLC_GAMES = [
+    { 
+        id: "2778580", 
+        nome: "Elden Ring: Shadow of the Erdtree", 
+        customImg: "https://cdn.akamai.steamstatic.com/steam/apps/2778580/library_600x900.jpg" 
+    },
+    { 
+        id: "2138330", 
+        nome: "Cyberpunk 2077: Phantom Liberty", 
+        customImg: "https://cdn.akamai.steamstatic.com/steam/apps/2138330/library_600x900.jpg" 
+    },
+    { 
+        id: "2336880", 
+        nome: "Destiny 2: The Final Shape", 
+        customImg: "https://cdn.akamai.steamstatic.com/steam/apps/2336880/library_600x900.jpg" 
+    },
+    { 
+        id: "2380740", 
+        nome: "RimWorld - Anomaly", 
+        customImg: "https://cdn.akamai.steamstatic.com/steam/apps/2380740/library_600x900.jpg" 
+    },
+    { 
+        id: "1117850", 
+        nome: "Cuphead - The Delicious Last Course", 
+        customImg: "https://cdn.akamai.steamstatic.com/steam/apps/1117850/library_600x900.jpg" 
+    },
+    { 
+        id: "2004210", 
+        nome: "Euro Truck Simulator 2 - West Balkans", 
+        customImg: "https://cdn.akamai.steamstatic.com/steam/apps/2004210/header.jpg" 
+    }
+];
+
+// Esta função gera o link que a Steam usa na maioria das listagens
+const getSteamImage = (id) => {
+    return `https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/header.jpg`;
+};
+
+// Teste rápido:
+// Elden Ring DLC: https://cdn.cloudflare.steamstatic.com/steam/apps/2778580/header.jpg
+    // --- FUNÇÃO DE BANNER (HERO) ---
+    async function updateHero() {
+        const destaques = [
+        { id: "1245620", nome: "ELDEN RING", desc: "O Jogo do Ano em sua melhor versão." },
+        { id: "1174180", nome: "RED DEAD REDEMPTION 2", desc: "Uma jornada épica pelo oeste americano." },
+        { id: "2694490", nome: "PATH OF EXILE 2", desc: "A nova geração do RPG de ação gratuito." },
+        { id: "2835570", nome: "BUCKSHOT ROULETTE", desc: "Dê o seu lance e tente sobreviver." },
+        { id: "1086940", nome: "BALDUR'S GATE 3", desc: "Uma aventura inigualável nos Reinos Esquecidos." },
+        { id: "1091500", nome: "CYBERPUNK 2077", desc: "Torne-se um mercenário urbano em Night City." },
+        { id: "1938090", nome: "CALL OF DUTY", desc: "Ação frenética e o combate tático definitivo." },
+        { id: "2050650", nome: "RESIDENT EVIL 4", desc: "O clássico do survival horror totalmente revitalizado." },
+        { id: "1817070", nome: "MARVEL'S SPIDER-MAN", desc: "Balance pela Nova York da Marvel em alta definição." },
+        { id: "413150", nome: "STARDEW VALLEY", desc: "Crie a fazenda dos seus sonhos nesta aventura rural." },
+        { id: "2322010", nome: "GOD OF WAR: RAGNARÖK", desc: "Kratos e Atreus em uma jornada pelos Nove Reinos." },
+        { id: "1446780", nome: "MONSTER HUNTER WILDS", desc: "A próxima geração da caça a monstros épicos." },
+        { id: "2018700", nome: "DEAD SPACE", desc: "O terror de ficção científica clássico totalmente refeito." },
+        { id: "1551360", nome: "FORZA HORIZON 5", desc: "Sua aventura definitiva no horizonte espera por você no México." },
+        { id: "1145360", nome: "HADES", desc: "Desafie o deus dos mortos enquanto luta para sair do Submundo." },
+        { id: "1446710", nome: "FINAL FANTASY VII REBIRTH", desc: "A jornada rumo ao desconhecido continua." },
+        { id: "534380", nome: "DYING LIGHT 2", desc: "O vírus venceu e a civilização caiu na Idade das Trevas." },
+        { id: "2124490", nome: "SILENT HILL 2", desc: "O ápice do terror psicológico agora no PC." },
+        { id: "1675200", nome: "STARFIELD", desc: "Crie qualquer personagem e explore com liberdade inigualável." },
+        { id: "221100", nome: "DAYZ", desc: "Quanto tempo você consegue sobreviver em um mundo pós-apocalíptico?" },
+        { id: "239140", nome: "DYNASTY WARRIORS", desc: "Enfrente exércitos inteiros em batalhas históricas." },
+        { id: "251570", nome: "7 DAYS TO DIE", desc: "O RPG de sobrevivência em mundo aberto definitivo." },
+        { id: "227300", nome: "EURO TRUCK SIMULATOR 2", desc: "Viaje pela Europa como o rei das estradas." },
+        { id: "105600", nome: "TERRARIA", desc: "Cave, lute, explore e construa em um mundo imenso." },
+        { id: "306130", nome: "THE ELDER SCROLLS ONLINE", desc: "Viva uma aventura sem limites em Tamriel." },
+        { id: "292030", nome: "THE WITCHER 3", desc: "Torne-se um caçador de monstros profissional." },
+        { id: "271590", nome: "GTA V", desc: "Explore a vida de três criminosos em Los Santos." },
+        { id: "252490", nome: "RUST", desc: "O único objetivo em Rust é sobreviver." },
+        { id: "394360", nome: "HEARTS OF IRON IV", desc: "Assuma o comando da maior máquina de guerra da história." }
+    ];
+        
+        const hoje = new Date();
+        const indice = hoje.getDate() % destaques.length;
+        const jogoHoje = destaques[indice];
+
+        const hTitle = document.getElementById('hero-title');
+        const hPrice = document.querySelector('.hero-price');
+        const hLink = document.getElementById('hero-link');
+        const hDesc = document.getElementById('hero-desc');
+        const banner = document.querySelector('.hero');
+
+        if(!hTitle || !hPrice) return;
+
+        try {
+            const url = `https://store.steampowered.com/api/appdetails?appids=${jogoHoje.id}&cc=br&l=pt`;
+            const r = await fetch(`${PROXY}${encodeURIComponent(url)}`);
+            const d = await r.json();
+
+            if(d[jogoHoje.id].success) {
+                const info = d[jogoHoje.id].data;
+                const p = info.price_overview;
+
+                hTitle.innerHTML = jogoHoje.nome.replace(":", ":<br>");
+                hDesc.innerText = jogoHoje.desc;
+                if(hLink) hLink.href = `https://store.steampowered.com/app/${jogoHoje.id}/`;
+                hPrice.innerText = info.is_free ? "GRÁTIS" : (p ? p.final_formatted : "VER NA STEAM");
+
+                if(banner) {
+                    const imgUrl = `https://cdn.akamai.steamstatic.com/steam/apps/${jogoHoje.id}/library_hero.jpg`;
+                    banner.style.backgroundImage = `url('${imgUrl}')`;
+                }
+            }
+        } catch(e) { console.log("Erro no Hero", e); }
+    }
+
+// --- CRIAÇÃO DOS CARDS (ATUALIZADA PARA HORIZONTAL) ---
+    function createCard(game, isDLC = false) {
+        const card = document.createElement('a');
+        card.href = `https://store.steampowered.com/app/${game.id}/`;
+        card.target = "_blank";
+        
+        // --- MUDANÇA AQUI ---
+        // Se for DLC, adiciona a classe 'is-dlc-card' para o CSS pegar
+        card.className = isDLC ? "game-card is-dlc-card" : "game-card";
+        // --------------------
+        
+        // Lógica de imagem (mantida da correção anterior)
+        const imgSrc = game.customImg || `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/library_600x900.jpg`;
+        
+        const badgeHTML = isDLC 
+            ? `<div class="dlc-badge">DLC</div><div id="tag-${game.id}" class="discount-tag hidden" style="left: auto; right: 10px;"></div>`
+            : `<div id="tag-${game.id}" class="discount-tag hidden"></div>`;
+
+        card.innerHTML = `
+            ${badgeHTML}
+            <div class="card-poster">
+                <img src="${imgSrc}" 
+                     loading="lazy" 
+                     alt="${game.nome}"
+                     onerror="this.onerror=null; this.src='https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg';">
+            </div>
+            <div class="card-info">
+                <span class="game-name">${game.nome}</span>
+                <span id="old-${game.id}" class="price-old"></span>
+                <span id="price-${game.id}" class="price-new price-loading">Carregando...</span>
+            </div>
+        `;
+
+        card.onclick = (e) => {
+            e.preventDefault();
+            const hero = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/library_hero.jpg`;
+            window.location.href = `jogo.html?nome=${encodeURIComponent(game.nome)}&img=${encodeURIComponent(hero)}&id=${game.id}`;
+        };
+
+        return card;
+    }
+
+    // --- FETCH DE PREÇOS ROBUSTO ---
+    async function fetchGameData(id) {
+        const priceEl = document.getElementById(`price-${id}`);
+        const oldEl = document.getElementById(`old-${id}`);
+        const tagEl = document.getElementById(`tag-${id}`);
+        
+        if(!priceEl) return;
+
+        try {
+            const apiStr = `https://store.steampowered.com/api/appdetails?appids=${id}&cc=br&l=pt`;
+            const response = await fetch(`${PROXY}${encodeURIComponent(apiStr)}`);
+            const data = await response.json();
+
+            if (data[id]?.success) {
+                const info = data[id].data;
+                priceEl.classList.remove('price-loading');
+
+                if (info.is_free) {
+                    priceEl.innerText = "GRÁTIS";
+                } else if (info.price_overview) {
+                    const po = info.price_overview;
+                    priceEl.innerText = po.final_formatted;
+                    
+                    if (po.discount_percent > 0) {
+                        oldEl.innerText = po.initial_formatted;
+                        tagEl.innerText = `-${po.discount_percent}%`;
+                        tagEl.classList.remove('hidden');
+                    }
+                } else {
+                    priceEl.innerText = "Ver na Steam";
+                }
+            } else {
+                priceEl.innerText = "Ver Oferta";
+            }
+        } catch (e) {
+            priceEl.innerText = "Ver Loja";
+        }
+    }
+
+    // --- INICIALIZAÇÃO ---
+    async function init() {
+        const mainContainer = document.getElementById('featured-grid');
+        const dlcContainer = document.getElementById('dlc-grid');
+        
+        // 1. Gera e carrega os JOGOS PRINCIPAIS
+        FEATURED_GAMES.forEach(game => {
+            mainContainer.appendChild(createCard(game, false));
+        });
+
+        // 2. Gera e carrega as DLCs
+        DLC_GAMES.forEach(game => {
+            dlcContainer.appendChild(createCard(game, true));
+        });
+
+        // 3. Busca preços em Lote (sequencial para não travar)
+        // Primeiro os Jogos
+        for (let i = 0; i < FEATURED_GAMES.length; i++) {
+            await fetchGameData(FEATURED_GAMES[i].id);
+            await new Promise(r => setTimeout(r, 150)); 
+        }
+        // Depois as DLCs
+        for (let i = 0; i < DLC_GAMES.length; i++) {
+            await fetchGameData(DLC_GAMES[i].id);
+            await new Promise(r => setTimeout(r, 150)); 
+        }
+    }
+
+    // --- BUSCA (Desktop) ---
+    document.getElementById('desktopSearchInput')?.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.game-card').forEach(card => {
+            const name = card.querySelector('.game-name').innerText.toLowerCase();
+            card.style.display = name.includes(term) ? 'block' : 'none';
+        });
+    });
+
+    window.onload = () => {
+        updateHero();
+        init();
+    };
+    </script>
 </body>
 </html>
