@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JT GAMES | Scanner Oficial</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #00f2ea; --bg: #050505; --card: rgba(255,255,255,0.03); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: #fff; min-height: 100vh; }
+        
+        #hero { position: fixed; inset: 0; z-index: -1; opacity: 0.15; filter: blur(30px); background-size: cover; background-position: center; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .btn-back { text-decoration: none; color: #fff; font-weight: 800; font-size: 0.7rem; padding: 10px 20px; background: var(--card); border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); }
+        
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 30px; text-align: center; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .card { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; min-height: 250px; backdrop-filter: blur(10px); transition: 0.3s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        
+        .store-name { font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .store-logo { width: 24px; height: 24px; }
+
+        .price-main { font-size: 1.8rem; font-weight: 800; display: block; margin-bottom: 5px; }
+        .promo-tag { background: #4c6b22; color: #ccff00; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+        
+        .btn-go { width: 100%; padding: 14px; border-radius: 12px; background: #fff; color: #000; text-decoration: none; font-weight: 800; font-size: 0.75rem; text-align: center; transition: 0.2s; text-transform: uppercase; }
+        .btn-go:hover { background: var(--primary); box-shadow: 0 0 15px var(--primary); }
+        
+        .info-small { font-size: 0.65rem; color: #555; margin-top: 10px; line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+    <div id="hero"></div>
+
+    <main class="container">
+        <div class="nav">
+            <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> VOLTAR</a>
+            <div style="font-weight: 800;">JT <span style="color:var(--primary)">GAMES</span></div>
+        </div>
+
+        <h1 id="gameTitle">Carregando...</h1>
+
+        <div class="grid">
+            <div class="card">
+                <div class="store-name"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" class="store-logo"> STEAM</div>
+                <div id="steam-price">
+                    <span class="price-main" style="font-size: 1rem; color: #444;">Buscando preço...</span>
+                </div>
+                <a id="steam-link" href="#" target="_blank" class="btn-go">Ver na Steam</a>
+            </div>
+
+            <div class="card">
+                <div class="store-name"><img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg" class="store-logo"> EPIC GAMES</div>
+                <div>
+                    <span class="price-main" style="font-size: 1rem;">PREÇO REGIONAL</span>
+                    <p class="info-small">Clique abaixo para ver a oferta oficial na Epic Store.</p>
+                </div>
+                <a id="epic-link" href="#" target="_blank" class="btn-go">Consultar Epic</a>
+            </div>
+
+            <div class="card">
+                <div class="store-name"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" class="store-logo"> XBOX STORE</div>
+                <div>
+                    <span class="price-main" style="font-size: 1rem;">CONSOLE / PC</span>
+                    <p class="info-small">Verifique a disponibilidade no ecossistema Microsoft.</p>
+                </div>
+                <a id="xbox-link" href="#" target="_blank" class="btn-go">Consultar Xbox</a>
+            </div>
+
+            <div class="card">
+                <div class="store-name"><img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Itch.io_logo.svg" class="store-logo"> ITCH.IO</div>
+                <div>
+                    <span class="price-main" style="font-size: 1rem;">INDIE DEALS</span>
+                    <p class="info-small">Ideal para jogos independentes e experimentais.</p>
+                </div>
+                <a id="itch-link" href="#" target="_blank" class="btn-go">Consultar Itch.io</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const nome = params.get('nome');
+        const img = params.get('img');
+        const steamId = img.split('/apps/')[1]?.split('/')[0];
+
+        document.getElementById('gameTitle').innerText = nome;
+        document.getElementById('hero').style.backgroundImage = `url('${img}')`;
+
+        // CONFIGURAÇÃO DE LINKS DE BUSCA DIRETA (SEM ERRO)
+        document.getElementById('steam-link').href = steamId ? `https://store.steampowered.com/app/${steamId}` : `https://store.steampowered.com/search/?term=${encodeURIComponent(nome)}`;
+        document.getElementById('epic-link').href = `https://store.epicgames.com/pt-BR/browse?q=${encodeURIComponent(nome)}`;
+        document.getElementById('xbox-link').href = `https://www.xbox.com/pt-br/search?q=${encodeURIComponent(nome)}`;
+        document.getElementById('itch-link').href = `https://itch.io/search?q=${encodeURIComponent(nome)}`;
+
+        // BUSCA PREÇO REAL SÓ DA STEAM (O ÚNICO QUE VEM CERTO EM R$)
+        if (steamId) {
+            fetch(`https://api.corsproxy.io/?url=${encodeURIComponent(`https://store.steampowered.com/api/appdetails?appids=${steamId}&cc=br&l=pt`)}`)
+                .then(r => r.json())
+                .then(data => {
+                    const game = data[steamId];
+                    if (game.success && game.data.price_overview) {
+                        const p = game.data.price_overview;
+                        document.getElementById('steam-price').innerHTML = `
+                            <span class="price-main">${p.final_formatted}</span>
+                            ${p.discount_percent > 0 ? `<span class="promo-tag">-${p.discount_percent}% OFF</span>` : ''}
+                        `;
+                    } else if (game.data.is_free) {
+                        document.getElementById('steam-price').innerHTML = `<span class="price-main" style="color:#00f2ea">GRÁTIS</span>`;
+                    } else {
+                        document.getElementById('steam-price').innerHTML = `<span class="price-main" style="font-size:1.2rem">CONSULTAR LOJA</span>`;
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('steam-price').innerHTML = `<span class="price-main" style="font-size:1.2rem">CONSULTAR LOJA</span>`;
+                });
+        }
+    </script>
+</body>
+</html>
