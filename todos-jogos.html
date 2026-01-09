@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JT Games Store | Catálogo Oficial</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090b;
+            --card: #18181b;
+            --primary: #8257e5;
+            --accent: #04d361;
+            --text: #ffffff;
+            --muted: #a1a1aa;
+        }
+        
+        .aviso-container {
+    max-width: 1400px;
+    margin: 15px auto;
+    padding: 15px 20px;
+    background: rgba(130, 87, 229, 0.05);
+    border: 1px solid #27272a;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Para mobile não quebrar */
+}
+
+.aviso-texto {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.aviso-texto i { color: var(--primary); font-size: 1.2rem; }
+.aviso-texto p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+
+.btn-recarregar {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.btn-recarregar:hover {
+    filter: brightness(1.2);
+    transform: scale(1.02);
+}
+
+.btn-recarregar:active { transform: scale(0.98); }
+
+/* Animação de girar quando clica */
+.girar { animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.aviso-sincronizacao {
+    max-width: 1400px;
+    margin: 10px auto;
+    padding: 12px 20px;
+    background: rgba(130, 87, 229, 0.1); /* Roxo bem clarinho */
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.aviso-sincronizacao i {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.aviso-sincronizacao p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.aviso-sincronizacao b {
+    color: var(--text);
+}
+
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+        
+        .header-search {
+            padding: 80px 20px 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, #111, var(--bg));
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--card);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid #27272a;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+        }
+        .btn-back:hover { background: var(--primary); border-color: var(--primary); }
+
+        .search-container { max-width: 600px; margin: 0 auto; position: relative; }
+        .search-container input {
+            width: 100%; padding: 15px 25px; border-radius: 12px;
+            border: 1px solid #27272a; background: var(--card);
+            color: white; font-size: 1rem; outline: none; transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .search-container input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(130, 87, 229, 0.3); }
+
+        .games-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 25px; padding: 20px; max-width: 1400px; margin: 0 auto;
+        }
+
+        .game-card { 
+            background: var(--card); border-radius: 16px; overflow: hidden; 
+            position: relative; transition: 0.4s; cursor: pointer; border: 1px solid #27272a;
+            display: flex; flex-direction: column;
+        }
+        .game-card:hover { transform: translateY(-8px); border-color: var(--primary); }
+
+        .card-poster { position: relative; width: 100%; aspect-ratio: 2/3; background: #111; overflow: hidden; }
+        .card-poster img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        
+        .card-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .game-name { font-weight: 700; display: block; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.95rem; }
+
+        .discount-badge {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--accent); color: #000; font-weight: 800;
+            padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; z-index: 2;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .price-container { display: flex; flex-direction: column; gap: 2px; min-height: 40px; justify-content: center; }
+        .price-old { text-decoration: line-through; color: var(--muted); font-size: 0.8rem; }
+        .price-new { color: var(--accent); font-weight: 800; font-size: 1.1rem; }
+        .price-normal { color: #fff; font-weight: 700; }
+        
+        /* Estilo para quando falhar o preço */
+        .store-fallback { 
+            color: #fff; font-size: 0.75rem; background: #333; 
+            padding: 6px 12px; border-radius: 4px; display: inline-block; width: fit-content; text-align: center;
+        }
+
+        #sentinel { text-align: center; padding: 60px; color: var(--muted); font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Início</a>
+
+    <div class="header-search">
+        <h1 style="margin-bottom: 25px;">Biblioteca JT</h1>
+        <div class="search-container">
+            <input type="text" id="gameSearch" placeholder="🔍 Digite para buscar em toda a biblioteca...">
+        </div>
+    </div>
+
+<div class="aviso-sincronizacao">
+    <i class="fas fa-info-circle"></i>
+    <p>
+        <b>Nota de Sincronização:</b> Algumas capas e preços são carregados em tempo real dos servidores oficiais. 
+        Se uma imagem não carregar ou o preço demorar, tente atualizar a página.
+    </p>
+</div>
+
+<div class="aviso-container">
+    <div class="aviso-texto">
+        <i class="fas fa-sync-alt"></i>
+        <p>
+            <b>Sincronização em tempo real:</b> Algumas imagens ou preços podem demorar a carregar devido à comunicação com os servidores da Steam.
+        </p>
+    </div>
+    <button class="btn-recarregar" onclick="forcarRecarregamento()">
+        <i class="fas fa-redo-alt" id="icon-load"></i> Atualizar
+    </button>
+</div>
+
+    <div class="games-grid" id="games-container"></div>
+    <div id="sentinel"><span>Carregando catálogo...</span></div>
+
+<script>
+// --- LISTA DE JOGOS (Mantida a mesma) ---
+const DATABASE = [
+    { id: "251570", nome: "7 Days to Die" },
+    { id: "1808500", nome: "ARC Raiders" },
+    { id: "221380", nome: "Age of Empires II: Definitive Edition" },
+    { id: "105450", nome: "Age of Empires III: Complete Collection" },
+    { id: "1466860", nome: "Age of Empires IV" },
+    { id: "214490", nome: "Alien: Isolation" },
+    { id: "270880", nome: "American Truck Simulator" },
+    { id: "945360", nome: "Among Us" },
+    { id: "107410", nome: "Arma 3" },
+    { id: "346110", nome: "ARK: Survival Evolved" },
+    { id: "812140", nome: "Assassin's Creed Odyssey" },
+    { id: "582160", nome: "Assassin's Creed Origins" },
+    { id: "2208920", nome: "Assassin's Creed Valhalla" },
+    { id: "244210", nome: "Assetto Corsa" },
+    { id: "805550", nome: "Assetto Corsa Competizione" },
+    { id: "1086940", nome: "Baldur's Gate 3" },
+    { id: "35140", nome: "Batman: Arkham Asylum GOTY" },
+    { id: "200260", nome: "Batman: Arkham City" },
+    { id: "208650", nome: "Batman: Arkham Knight" },
+    { id: "209000", nome: "Batman: Arkham Origins" },
+    { id: "238460", nome: "BattleBlock Theater" },
+    { id: "8870", nome: "BioShock Infinite" },
+    { id: "2358720", nome: "Black Myth: Wukong" },
+    { id: "774361", nome: "Blasphemous" },
+    { id: "2114740", nome: "Blasphemous 2" },
+    { id: "960090", nome: "Bloons TD 6" },
+    { id: "49520", nome: "Borderlands 2" },
+    { id: "397540", nome: "Borderlands 3" },
+    { id: "311210", nome: "Call of Duty: Black Ops III" },
+    { id: "1321440", nome: "Cassette Beasts" },
+    { id: "204360", nome: "Castle Crashers" },
+    { id: "504230", nome: "Celeste" },
+    { id: "1824220", nome: "Chivalry 2" },
+    { id: "219640", nome: "Chivalry: Medieval Warfare" },
+    { id: "255710", nome: "Cities: Skylines" },
+    { id: "949230", nome: "Cities: Skylines II" },
+    { id: "8930", nome: "Civilization V" },
+    { id: "289070", nome: "Civilization VI" },
+    { id: "10", nome: "Counter-Strike" },
+    { id: "240", nome: "Counter-Strike: Source" },
+    { id: "247080", nome: "Crypt of the NecroDancer" },
+    { id: "268910", nome: "Cuphead" },
+    { id: "1091500", nome: "Cyberpunk 2077" },
+    { id: "236430", nome: "DARK SOULS II" },
+    { id: "335300", nome: "DARK SOULS II: Scholar of the First Sin" },
+    { id: "374320", nome: "DARK SOULS III" },
+    { id: "570940", nome: "DARK SOULS: REMASTERED" },
+    { id: "262060", nome: "Darkest Dungeon" },
+    { id: "1096530", nome: "Darkest Dungeon II" },
+    { id: "221100", nome: "DayZ" },
+    { id: "381210", nome: "Dead by Daylight" },
+    { id: "601150", nome: "Devil May Cry 5" },
+    { id: "205100", nome: "Dishonored" },
+    { id: "403640", nome: "Dishonored 2" },
+    { id: "435150", nome: "Divinity: Original Sin 2" },
+    { id: "220440", nome: "DmC: Devil May Cry" },
+    { id: "219740", nome: "Don't Starve" },
+    { id: "322330", nome: "Don't Starve Together" },
+    { id: "379720", nome: "DOOM (2016)" },
+    { id: "782330", nome: "DOOM Eternal" },
+    { id: "47810", nome: "Dragon Age: Origins" },
+    { id: "1562430", nome: "DREDGE" },
+    { id: "239140", nome: "Dying Light" },
+    { id: "534380", nome: "Dying Light 2 Stay Human" },
+    { id: "1245620", nome: "ELDEN RING" },
+    { id: "311690", nome: "Enter the Gungeon" },
+    { id: "411300", nome: "Esports Life Tycoon" },
+    { id: "236850", nome: "Europa Universalis IV" },
+    { id: "227300", nome: "Euro Truck Simulator 2" },
+    { id: "1066890", nome: "F1 24" },
+    { id: "377160", nome: "Fallout 4" },
+    { id: "1151340", nome: "Fallout 76" },
+    { id: "22380", nome: "Fallout: New Vegas" },
+    { id: "1248130", nome: "Farming Simulator 22" },
+    { id: "637650", nome: "Final Fantasy XV" },
+    { id: "39140", nome: "Final Fantasy VII" },
+    { id: "1462040", nome: "Final Fantasy VII Remake Intergrade" },
+    { id: "1551360", nome: "Forza Horizon 5" },
+    { id: "212680", nome: "FTL: Faster Than Light" },
+    { id: "4000", nome: "Garry's Mod" },
+    { id: "1593500", nome: "God of War" },
+    { id: "2322010", nome: "God of War Ragnarök" },
+    { id: "3240220", nome: "Grand Theft Auto V" },
+    { id: "12210", nome: "Grand Theft Auto IV: The Complete Edition" },
+    { id: "1145360", nome: "Hades" },
+    { id: "1145350", nome: "Hades II" },
+    { id: "70", nome: "Half-Life" },
+    { id: "220", nome: "Half-Life 2" },
+    { id: "320", nome: "Half-Life 2: Deathmatch" },
+    { id: "976730", nome: "Halo: The Master Chief Collection" },
+    { id: "394360", nome: "Hearts of Iron IV" },
+    { id: "553850", nome: "HELLDIVERS 2" },
+    { id: "1659040", nome: "HITMAN 3" },
+    { id: "990080", nome: "Hogwarts Legacy" },
+    { id: "367520", nome: "Hollow Knight" },
+    { id: "1030300", nome: "Hollow Knight: Silksong" },
+    { id: "2420110", nome: "Horizon Forbidden West" },
+    { id: "1151640", nome: "Horizon Zero Dawn" },
+    { id: "219150", nome: "Hotline Miami" },
+    { id: "274170", nome: "Hotline Miami 2: Wrong Number" },
+    { id: "1426210", nome: "It Takes Two" },
+    { id: "220200", nome: "Kerbal Space Program" },
+    { id: "232090", nome: "Killing Floor 2" },
+    { id: "500", nome: "Left 4 Dead" },
+    { id: "550", nome: "Left 4 Dead 2" },
+    { id: "920210", nome: "LEGO Star Wars: The Skywalker Saga" },
+    { id: "1966720", nome: "Lethal Company" },
+    { id: "1627720", nome: "Lies of P" },
+    { id: "265300", nome: "Lords Of The Fallen" },
+    { id: "1817070", nome: "Marvel’s Spider-Man Remastered" },
+    { id: "1817190", nome: "Marvel’s Spider-Man: Miles Morales" },
+    { id: "286690", nome: "Metro 2033 Redux" },
+    { id: "412020", nome: "Metro Exodus" },
+    { id: "287390", nome: "Metro: Last Light Redux" },
+    { id: "1250410", nome: "Microsoft Flight Simulator" },
+    { id: "1446780", nome: "Monster Hunter Rise" },
+    { id: "582010", nome: "Monster Hunter: World" },
+    { id: "629760", nome: "MORDHAU" },
+    { id: "1971870", nome: "Mortal Kombat 1" },
+    { id: "976310", nome: "Mortal Kombat 11" },
+    { id: "48700", nome: "Mount & Blade" },
+    { id: "261550", nome: "Mount & Blade II: Bannerlord" },
+    { id: "22100", nome: "Mount & Blade: Warband" },
+    { id: "1063730", nome: "New World" },
+    { id: "275850", nome: "No Man's Sky" },
+    { id: "753640", nome: "Outer Wilds" },
+    { id: "25000", nome: "Overgrowth" },
+    { id: "1623730", nome: "Palworld" },
+    { id: "239030", nome: "Papers, Please" },
+    { id: "218620", nome: "PAYDAY 2" },
+    { id: "1272080", nome: "PAYDAY 3" },
+    { id: "739630", nome: "Phasmophobia" },
+    { id: "291650", nome: "Pillars of Eternity" },
+    { id: "400", nome: "Portal" },
+    { id: "620", nome: "Portal 2" },
+    { id: "223470", nome: "Postal 2" },
+    { id: "108600", nome: "Project Zomboid" },
+    { id: "3830", nome: "Psychonauts" },
+    { id: "648800", nome: "Raft" },
+    { id: "1174180", nome: "Red Dead Redemption 2" },
+    { id: "1404210", nome: "Red Dead Online" },
+    { id: "2668510", nome: "Red Dead Redemption" },
+    { id: "883710", nome: "Resident Evil 2" },
+    { id: "952060", nome: "Resident Evil 3" },
+    { id: "2050650", nome: "Resident Evil 4" },
+    { id: "418370", nome: "Resident Evil 7 Biohazard" },
+    { id: "1196590", nome: "Resident Evil Village" },
+    { id: "294100", nome: "RimWorld" },
+    { id: "391220", nome: "Rise of the Tomb Raider" },
+    { id: "632360", nome: "Risk of Rain 2" },
+    { id: "4760", nome: "Rome: Total War" },
+    { id: "252490", nome: "Rust" },
+    { id: "1332010", nome: "Stray" },
+    { id: "1643320", nome: "S.T.A.L.K.E.R. 2: Heart of Chornobyl" },
+    { id: "4500", nome: "S.T.A.L.K.E.R.: Shadow of Chernobyl" },
+    { id: "223100", nome: "Saints Row IV" },
+    { id: "526870", nome: "Satisfactory" },
+    { id: "1172620", nome: "Sea of Thieves" },
+    { id: "814380", nome: "Sekiro: Shadows Die Twice" },
+    { id: "750920", nome: "Shadow of the Tomb Raider" },
+    { id: "2138710", nome: "Sifu" },
+    { id: "2124490", nome: "Silent Hill 2" },
+    { id: "489830", nome: "Skyrim Special Edition" },
+    { id: "646570", nome: "Slay the Spire" },
+    { id: "203650", nome: "Sonic Generations" },
+    { id: "1326470", nome: "Sons of the Forest" },
+    { id: "244850", nome: "Space Engineers" },
+    { id: "1172380", nome: "Star Wars Jedi: Fallen Order" },
+    { id: "1774580", nome: "Star Wars Jedi: Survivor" },
+    { id: "211820", nome: "Starbound" },
+    { id: "413150", nome: "Stardew Valley" },
+    { id: "1716740", nome: "Starfield" },
+    { id: "281990", nome: "Stellaris" },
+    { id: "1364780", nome: "Street Fighter 6" },
+    { id: "264710", nome: "Subnautica" },
+    { id: "40800", nome: "Super Meat Boy" },
+    { id: "389730", nome: "TEKKEN 7" },
+    { id: "1778820", nome: "TEKKEN 8" },
+    { id: "105600", nome: "Terraria" },
+    { id: "250900", nome: "The Binding of Isaac: Rebirth" },
+    { id: "306130", nome: "The Elder Scrolls Online" },
+    { id: "242760", nome: "The Forest" },
+    { id: "292030", nome: "The Witcher 3: Wild Hunt" },
+    { id: "210970", nome: "The Witness" },
+    { id: "1286680", nome: "Tiny Tina's Wonderlands" },
+    { id: "365590", nome: "Tom Clancy's The Division" },
+    { id: "203160", nome: "Tomb Raider" },
+    { id: "594570", nome: "Total War: WARHAMMER II" },
+    { id: "1142710", nome: "Total War: WARHAMMER III" },
+    { id: "35720", nome: "Trine 2" },
+    { id: "391540", nome: "Undertale" },
+    { id: "892970", nome: "Valheim" },
+    { id: "431960", nome: "Wallpaper Engine" },
+    { id: "268500", nome: "XCOM 2" },
+    { id: "200510", nome: "XCOM: Enemy Unknown" },
+    { id: "480650", nome: "Yu-Gi-Oh! Legacy of the Duelist" }
+];
+
+    let pointer = 0;
+    const BATCH_SIZE = 8; // Reduzi para 8 para evitar travamentos
+    // NOVO PROXY (Mais estável que o allorigins)
+    const PROXY = "https://corsproxy.io/?"; 
+    const container = document.getElementById('games-container');
+    const sentinel = document.getElementById('sentinel');
+    let searchTimeout;
+
+    // --- CRIAÇÃO DO CARD (COM SISTEMA ANTI-FALHA DE IMAGEM) ---
+    function createCard(game) {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        
+        // Imagens Oficiais da Steam (Não usa Proxy)
+        const imgVertical = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${game.id}/library_600x900.jpg`;
+        const imgHorizontal = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg`;
+
+        card.innerHTML = `
+            <div id="badge-${game.id}"></div>
+            <div class="card-poster">
+                <img src="${imgVertical}" 
+                     alt="${game.nome}"
+                     onerror="this.onerror=null; this.src='${imgHorizontal}';"
+                     loading="lazy">
+            </div>
+            <div class="card-info">
+                <span class="game-name">${game.nome}</span>
+                <div class="price-container" id="price-box-${game.id}">
+                    <span style="color:var(--muted); font-size:0.7rem"><i class="fas fa-circle-notch fa-spin"></i> Sincronizando...</span>
+                </div>
+            </div>
+        `;
+
+        card.onclick = () => {
+            const hero = `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/library_hero.jpg`;
+            window.location.href = `jogo.html?nome=${encodeURIComponent(game.nome)}&img=${encodeURIComponent(hero)}&id=${game.id}`;
+        };
+        return card;
+    }
+
+    // --- BUSCA ---
+    document.getElementById('gameSearch').addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const term = e.target.value.toLowerCase().trim();
+
+        searchTimeout = setTimeout(() => {
+            if (term.length > 0) {
+                observer.unobserve(sentinel);
+                sentinel.style.display = 'none';
+
+                const filtered = DATABASE.filter(game => game.nome.toLowerCase().includes(term));
+                
+                container.innerHTML = "";
+                filtered.forEach(game => {
+                    container.appendChild(createCard(game));
+                    fetchGameData(game.id);
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--muted);">Nenhum jogo encontrado.</div>`;
+                }
+            } else {
+                resetCatalog();
+            }
+        }, 300);
+    });
+
+    function resetCatalog() {
+        container.innerHTML = "";
+        pointer = 0;
+        sentinel.style.display = 'block';
+        observer.observe(sentinel);
+        loadBatch();
+    }
+
+    // --- SISTEMA DE PREÇO (COM PROTEÇÃO CONTRA ERRO) ---
+    async function fetchGameData(id) {
+        const priceBox = document.getElementById(`price-box-${id}`);
+        const badgeBox = document.getElementById(`badge-${id}`);
+        if(!priceBox) return;
+
+        try {
+            // URL da Steam via Proxy novo
+            const apiStr = `https://store.steampowered.com/api/appdetails?appids=${id}&cc=br&l=pt`;
+            // encodeURIComponent garante que a URL passe corretamente pelo proxy
+            const response = await fetch(`${PROXY}${encodeURIComponent(apiStr)}`);
+
+            if (!response.ok) throw new Error('Proxy error');
+            
+            const data = await response.json();
+            
+            if (data[id]?.success) {
+                const info = data[id].data;
+                priceBox.innerHTML = ""; // Limpa loading
+
+                if (info.is_free) {
+                    priceBox.innerHTML = `<span class="price-new">GRÁTIS</span>`;
+                } else if (info.price_overview) {
+                    const po = info.price_overview;
+                    if (po.discount_percent > 0) {
+                        if(badgeBox) badgeBox.innerHTML = `<div class="discount-badge">-${po.discount_percent}%</div>`;
+                        priceBox.innerHTML = `<span class="price-old">${po.initial_formatted}</span><span class="price-new">${po.final_formatted}</span>`;
+                    } else {
+                        priceBox.innerHTML = `<span class="price-normal">${po.final_formatted}</span>`;
+                    }
+                } else {
+                    // Preço não disponível ou bundle
+                    priceBox.innerHTML = `<span class="store-fallback">Ver na Steam</span>`;
+                }
+            } else {
+                // Jogo existe mas API não retornou dados de loja
+                priceBox.innerHTML = `<span class="store-fallback">Ver na Steam</span>`;
+            }
+        } catch (e) {
+            // Se der erro de conexão (Bloqueio), mostra botão genérico
+            // Isso impede que fique "Sincronizando" para sempre
+            priceBox.innerHTML = `<span class="store-fallback">Ver Loja</span>`;
+        }
+    }
+
+    // --- INFINITE SCROLL ---
+    async function loadBatch() {
+        if (pointer >= DATABASE.length) return;
+        const batch = DATABASE.slice(pointer, pointer + BATCH_SIZE);
+        pointer += BATCH_SIZE;
+
+        batch.forEach(game => {
+            // 1. Cria o card visualmente (imediato)
+            container.appendChild(createCard(game));
+            
+            // 2. Busca o preço em segundo plano (com pequeno atraso para não travar)
+            setTimeout(() => {
+                fetchGameData(game.id);
+            }, Math.random() * 2000); 
+        });
+
+        if (pointer >= DATABASE.length) {
+            sentinel.innerHTML = "Fim da biblioteca.";
+            observer.unobserve(sentinel);
+        }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) loadBatch();
+    }, { threshold: 0.1 });
+
+    observer.observe(sentinel);
+    function forcarRecarregamento() {
+    const btnIcon = document.getElementById('icon-load');
+    
+    // Adiciona animação de giro
+    btnIcon.classList.add('girar');
+    
+    // Limpa o grid e reseta o ponteiro para carregar tudo de novo
+    setTimeout(() => {
+        container.innerHTML = "";
+        pointer = 0;
+        sentinel.style.display = 'block';
+        observer.observe(sentinel);
+        loadBatch();
+        
+        // Remove animação após 1 segundo
+        setTimeout(() => {
+            btnIcon.classList.remove('girar');
+        }, 1000);
+    }, 300);
+}
+</script>
+</body>
+</html>
